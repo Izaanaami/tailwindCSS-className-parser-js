@@ -1,6 +1,4 @@
-<p align="center">
-        Thanks to [siddharthkp](https://github.com/siddharthkp) who built the main part of this package
-</p>
+** Thanks to [siddharthkp](https://github.com/siddharthkp) who built the main part package **
 
 <p align="center">
   <img src="https://avatars2.githubusercontent.com/u/71650913?s=200&v=4" height="50px"/>
@@ -99,4 +97,12 @@ const { className, error } = classname({
 
 #### license
 
-MIT © [siddharthkp](https://github.com/siddharthkp)
+MIT © 
+
+<br/>
+
+[siddharthkp](https://github.com/siddharthkp)
+
+<br/>
+
+[Izaanaami](https://github.com/Izaanaami)
