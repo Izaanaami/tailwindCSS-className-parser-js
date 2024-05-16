@@ -55,8 +55,8 @@ const Tailwind = (config?: Config) => {
 
     }
     // strip away the arbitrary value or property if there is any
-    let arbitraryValue: String;
-    let arbitraryProperty: String;
+    let arbitraryValue: string;
+    let arbitraryProperty: string;
     if(isArbitraryProperty || isArbitraryValue) {
       const startIndex = className.indexOf("[");
       const endIndex = className.indexOf("]");
@@ -65,19 +65,28 @@ const Tailwind = (config?: Config) => {
       else arbitraryValue = arbitraryPart;
     }
     
-    const numberOfModifiers = className.split(':').length - 1;
+    let numberOfModifiers: number;
+    if(isArbitraryProperty) {
+      let classNameWithoutArbitraryProperty = className.replace(arbitraryProperty, "");
+      numberOfModifiers = classNameWithoutArbitraryProperty.split(":").length;
+    } else {
+      numberOfModifiers = className.split(':').length - 1;
+    }
 
-    if (numberOfModifiers === 0) classNameWithoutModifiers = className;
+    if (numberOfModifiers === 0 && !isArbitraryProperty) classNameWithoutModifiers = className;
+    else if(numberOfModifiers === 0 && isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
     else if (numberOfModifiers === 1) {
       const unknownModifier = className.split(':')[0];
-      classNameWithoutModifiers = className.split(':')[1];
+      if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
+      else classNameWithoutModifiers = className.split(':')[1];
       if (responsiveModifiers.includes(unknownModifier)) responsiveModifier = unknownModifier;
       else if (pseudoModifiers.includes(unknownModifier)) pseudoModifier = unknownModifier;
       else; // have no idea what this is, TODO: should this ignore or throw an error?
     } else if (numberOfModifiers === 2) {
       responsiveModifier = className.split(':')[0];
       pseudoModifier = className.split(':')[1];
-      classNameWithoutModifiers = className.split(':')[2];
+      if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
+      else classNameWithoutModifiers = className.split(':')[2];
     }
 
     let isNegative = false;
@@ -86,10 +95,8 @@ const Tailwind = (config?: Config) => {
       classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
-    // check if its a arbitrary className
-    // if()
     // check named classes first
-    else if (namedClassProperties[classNameWithoutModifiers]) {
+    if (namedClassProperties[classNameWithoutModifiers]) {
       const styles = namedClassProperties[classNameWithoutModifiers];
       if (Object.keys(styles).length > 1) {
         propertyName = 'composite';
