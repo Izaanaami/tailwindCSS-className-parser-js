@@ -33,32 +33,60 @@ const Tailwind = (config?: Config) => {
     let propertyValue: string | null;
     let relatedProperties: { [key: string]: string } = {};
 
-    let classNameWithoutModifers: string = '';
+    let classNameWithoutModifiers: string = '';
 
+    // check the className for any arbitrary property or value before splitting the modifiers 
+    // because arbitrary properties include ':' and we need to strip them away before splitting modifiers using ':'
+    let isArbitraryProperty = false;
+    let isArbitraryValue = false;
+    if(className.includes("[")) {
+      let index = className.indexOf("[") - 1;
+      if(index === -1 || className.charAt(index) !== "-") {
+        isArbitraryProperty = true;
+      } else {
+        isArbitraryValue = true;
+      }
+
+    }
+    // strip away the arbitrary value or property if there is any
+    let arbitraryValue: String;
+    let arbitraryProperty: String;
+    if(isArbitraryProperty || isArbitraryValue) {
+      const startIndex = className.indexOf("[");
+      const endIndex = className.indexOf("]");
+      let arbitraryPart = className.slice(startIndex, endIndex + 1);
+      if(isArbitraryProperty) arbitraryProperty = arbitraryPart;
+      else arbitraryValue = arbitraryPart;
+    }
+    
     const numberOfModifiers = className.split(':').length - 1;
 
-    if (numberOfModifiers === 0) classNameWithoutModifers = className;
+    if (numberOfModifiers === 0) classNameWithoutModifiers = className;
     else if (numberOfModifiers === 1) {
       const unknownModifier = className.split(':')[0];
-      classNameWithoutModifers = className.split(':')[1];
+      classNameWithoutModifiers = className.split(':')[1];
       if (responsiveModifiers.includes(unknownModifier)) responsiveModifier = unknownModifier;
       else if (pseudoModifiers.includes(unknownModifier)) pseudoModifier = unknownModifier;
       else; // have no idea what this is, TODO: should this ignore or throw an error?
     } else if (numberOfModifiers === 2) {
       responsiveModifier = className.split(':')[0];
       pseudoModifier = className.split(':')[1];
-      classNameWithoutModifers = className.split(':')[2];
+      classNameWithoutModifiers = className.split(':')[2];
     }
 
+    let isArbitrary = false;
+    if(classNameWithoutModifiers.startsWith("[")) {
+      isArbitrary = true;
+    }
     let isNegative = false;
-    if (classNameWithoutModifers.startsWith('-')) {
+    if (classNameWithoutModifiers.startsWith('-')) {
       isNegative = true;
-      classNameWithoutModifers = classNameWithoutModifers.replace('-', '');
+      classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
     // check named classes first
-    if (namedClassProperties[classNameWithoutModifers]) {
-      const styles = namedClassProperties[classNameWithoutModifers];
+    if (namedClassProperties[classNameWithoutModifiers]) {
+      const styles = namedClassProperties[classNameWithoutModifiers];
       if (Object.keys(styles).length > 1) {
         propertyName = 'composite';
         propertyValue = null;
@@ -70,8 +98,8 @@ const Tailwind = (config?: Config) => {
     } else {
       const possiblePropertyNames = Object.keys(properties).filter((name) => {
         const property = properties[name];
-        if (classNameWithoutModifers === property.prefix) return true; // flex-grow-DEFAULT = flex-grow
-        if (classNameWithoutModifers.startsWith(property.prefix + '-')) return true;
+        if (classNameWithoutModifiers === property.prefix) return true; // flex-grow-DEFAULT = flex-grow
+        if (classNameWithoutModifiers.startsWith(property.prefix + '-')) return true;
         return false;
       });
 
@@ -97,8 +125,8 @@ const Tailwind = (config?: Config) => {
             const scaleKey =
               property.scale === 'colors'
                 ? // remove opacity modifier
-                  classNameWithoutModifers.split('/')[0].replace(property.prefix + '-', '')
-                : classNameWithoutModifers.replace(property.prefix + '-', '');
+                  classNameWithoutModifiers.split('/')[0].replace(property.prefix + '-', '')
+                : classNameWithoutModifiers.replace(property.prefix + '-', '');
 
             if (scale.DEFAULT) scale[property.prefix] = scale.DEFAULT;
 
@@ -118,8 +146,8 @@ const Tailwind = (config?: Config) => {
           const scaleKey =
             property.scale === 'colors'
               ? // remove opacity modifier
-                classNameWithoutModifers.split('/')[0].replace(property.prefix + '-', '')
-              : classNameWithoutModifers.replace(property.prefix + '-', '');
+                classNameWithoutModifiers.split('/')[0].replace(property.prefix + '-', '')
+              : classNameWithoutModifiers.replace(property.prefix + '-', '');
           const possibleValue = scale[scaleKey];
 
           // fontSize is special
@@ -127,7 +155,7 @@ const Tailwind = (config?: Config) => {
             propertyValue = possibleValue[0];
             relatedProperties = possibleValue[1];
           } else if (property.scale === 'colors') {
-            const opacity = parseInt(classNameWithoutModifers.split('/')[1]);
+            const opacity = parseInt(classNameWithoutModifiers.split('/')[1]);
             propertyValue = possibleValue + (opacity ? percentToHex(opacity) : '');
           } else if (Array.isArray(possibleValue)) {
             // true for fontFamily and dropShadow
