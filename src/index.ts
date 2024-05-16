@@ -38,9 +38,9 @@ const Tailwind = (config?: Config) => {
     let isImportant = false;
     if(className.startsWith("!") || className.endsWith("!")) {
       isImportant = true;
-      className.replace("!", "");
+      className = className.replace("!", "");
     }
-
+    
     // check the className for any arbitrary property or value before splitting the modifiers 
     // because arbitrary properties include ':' and we need to strip them away before splitting modifiers using ':'
     let isArbitraryProperty = false;
