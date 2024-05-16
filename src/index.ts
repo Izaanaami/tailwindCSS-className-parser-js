@@ -35,6 +35,12 @@ const Tailwind = (config?: Config) => {
 
     let classNameWithoutModifiers: string = '';
 
+    let isImportant = false;
+    if(className.startsWith("!") || className.endsWith("!")) {
+      isImportant = true;
+      className.replace("!", "");
+    }
+
     // check the className for any arbitrary property or value before splitting the modifiers 
     // because arbitrary properties include ':' and we need to strip them away before splitting modifiers using ':'
     let isArbitraryProperty = false;
@@ -74,18 +80,16 @@ const Tailwind = (config?: Config) => {
       classNameWithoutModifiers = className.split(':')[2];
     }
 
-    let isArbitrary = false;
-    if(classNameWithoutModifiers.startsWith("[")) {
-      isArbitrary = true;
-    }
     let isNegative = false;
     if (classNameWithoutModifiers.startsWith('-')) {
       isNegative = true;
       classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
+    // check if its a arbitrary className
+    // if()
     // check named classes first
-    if (namedClassProperties[classNameWithoutModifiers]) {
+    else if (namedClassProperties[classNameWithoutModifiers]) {
       const styles = namedClassProperties[classNameWithoutModifiers];
       if (Object.keys(styles).length > 1) {
         propertyName = 'composite';
