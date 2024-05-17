@@ -410,6 +410,7 @@ export const namedClassProperties = {
   'list-inside': { 'list-style-position': 'inside' },
   'list-item': { display: 'list-item' },
   'list-outside': { 'list-style-position': 'outside' },
+  'list-image-none': {'list-style-image' : 'none'},
   lowercase: { 'text-transform': 'lowercase' },
   'mix-blend-color': { 'mix-blend-mode': 'color' },
   'mix-blend-color-burn': { 'mix-blend-mode': 'color-burn' },
@@ -631,6 +632,7 @@ export const arbitraryProperties : ArbitraryProperties = {
   "blur": {property: ["blur"]},
   "brightness": {property: ["brightness"]},
 
+  "border": {property: ["borderWidth", "borderStyle", "borderColor"]},
   "border-color": {property: ["borderColor"]},
   "border-top-color": {property: ["borderTopColor"]},
   "border-right-color": {property: ["borderRightColor"]},
@@ -701,6 +703,24 @@ export const arbitraryProperties : ArbitraryProperties = {
   "grid-auto-flow": {property: ["grid-auto-flow"]},
   "grid-template-areas": {property: ["grid-template-areas"]},
   "grid": {property: ["gridTemplateRows", "gridTemplateColumns", "grid-template-areas", "gridAutoRows", "gridAutoColumns", "grid-auto-flow"]},
+
+  "height": {property: ["height"]},
+
+  "letter-spacing": {property: ["letterSpacing"]},
+  "line-height": {property: ["lineHeight"]},
+  "line-break": {property: ["line-break"]},
+
+  "list-style": {property: ["list-style-type", "list-style-position", "list-style-image"]},
+  "list-style-type": {property: ["listStyleType"]},
+  "list-style-position": {property: ["list-style-position"]},
+  "list-style-image": {property: ["list-style-image"]},
+
+  "max-height": {property: ["maxHeight"]},
+  "max-width": {property: ["maxWidth"]},
+  "min-height": {property: ["minHeight"]},
+  "min-width": {property: ["minWidth"]},
+
+  "object-position": {property: ["objectPosition"]},
 
   "word-break": {property: ["word-break"]},
 }
