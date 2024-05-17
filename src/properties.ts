@@ -2,13 +2,16 @@
 // TODO: some of these values are not single properties like paddingX
 // TODO: some of these values are not simple classname selectors like divideX
 
+type Property = {
+  prefix: string;
+  scale: string;
+  supportsNegativeValues?: boolean;
+}
+
 type Properties = {
-  [key: string]: {
-    prefix: string;
-    scale: string;
-    supportsNegativeValues?: boolean;
-  };
+  [key: string]: Property
 };
+
 
 export const properties: Properties = {
   // generated list:
@@ -95,7 +98,7 @@ export const properties: Properties = {
   borderRightColor: { prefix: "border-r", scale: "colors" },
   borderBottomColor: { prefix: "border-b", scale: "colors" },
   borderLeftColor: { prefix: "border-l", scale: "colors" },
-  
+
   borderStyle: { prefix: 'border', scale: 'borderStyle' },
 
   borderWidth: { prefix: 'border', scale: 'borderWidth' },
@@ -109,6 +112,16 @@ export const properties: Properties = {
   borderRadiusTopRight: { prefix: 'rounded-tr', scale: 'borderRadius' },
   borderRadiusBottomRight: { prefix: 'rounded-br', scale: 'borderRadius' },
   borderRadiusBottomLeft: { prefix: 'rounded-bl', scale: 'borderRadius' },
+  borderRadiusTop: {prefix: 'rounded-t', scale: 'borderRadius'},
+  borderRadiusRight: {prefix: 'rounded-r', scale: 'borderRadius'},
+  borderRadiusBottom: {prefix: 'rounded-b', scale: 'borderRadius'},
+  borderRadiusLeft: {prefix: 'rounded-l', scale: 'borderRadius'},
+  "borderRadius-startStart-endStart": {prefix: 'rounded-s', scale: 'borderRadius'},
+  "borderRadius-startEnd-endEnd": {prefix: 'rounded-e', scale: 'borderRadius'},
+  "borderRadius-startStart": {prefix: 'rounded-ss', scale: 'borderRadius'},
+  "borderRadius-startEnd": {prefix: 'rounded-se', scale: 'borderRadius'},
+  "borderRadius-endEnd": {prefix: 'rounded-ee', scale: 'borderRadius'},
+  "borderRadius-endStart": {prefix: 'rounded-es', scale: 'borderRadius'},
 
   borderSpacing: { prefix: 'border-spacing', scale: 'borderSpacing' },
   borderSpacingX: { prefix: 'border-spacing-x', scale: 'borderSpacing' },
@@ -357,11 +370,11 @@ export const namedClassProperties = {
   'float-right': { float: 'right' },
   'flow-root': { display: 'flow-root' },
   grid: { display: 'grid' },
-  'grid-flow-col': { gridAutoFlow: 'column' },
-  'grid-flow-col-dense': { gridAutoFlow: 'column dense' },
-  'grid-flow-dense': { gridAutoFlow: 'dense' },
-  'grid-flow-row': { gridAutoFlow: 'row' },
-  'grid-flow-row-dense': { gridAutoFlow: 'row dense' },
+  'grid-flow-col': { "grid-auto-flow": 'column' },
+  'grid-flow-col-dense': { "grid-auto-flow": 'column dense' },
+  'grid-flow-dense': { "grid-auto-flow": 'dense' },
+  'grid-flow-row': { "grid-auto-flow": 'row' },
+  'grid-flow-row-dense': { "grid-auto-flow": 'row dense' },
   hidden: { display: 'none' },
   inline: { display: 'inline' },
   'inline-block': { display: 'inline-block' },
@@ -587,3 +600,107 @@ export const namedClassProperties = {
   'whitespace-pre-line': { 'white-space': 'pre-line' },
   'whitespace-pre-wrap': { 'white-space': 'pre-wrap' }
 };
+
+type ArbitraryProperties = {
+  [key: string]: {
+    property : string[]
+  }
+}
+export const arbitraryProperties : ArbitraryProperties = {
+  "aspect-ratio" : { property: ["aspectRatio"]},
+  "appearance": {property: ["appearance"]},
+  "accent-color": {property: ["accentColor"]},
+  "animation": {property: ["animation"]},
+  
+  "align-content": {property: ["align-content"]},
+  "align-items": {property: ["align-items"]},
+  "align-self": {property: ["align-self"]},
+
+  "background-image": { property: ["backgroundImage"]},
+  "background-position": { property: ["backgroundPosition"]},
+  "background-size": { property: ["backgroundSize"]},
+  "background-blend-mode": { property: ["background-blend-mode"]},
+  "background-clip": { property: ["background-clip"]},
+  "background-color": {property: ["backgroundColor"]},
+  "background": {property: ["backgroundColor"]},
+  "background-attachment": {property: ["background-attachment"]},
+  "background-repeat": {property: ["background-repeat"]},
+  "background-origin": {property: ["background-origin"]},
+
+  "backdrop-filter": {property: ["backdrop-filter"]},
+  "blur": {property: ["blur"]},
+  "brightness": {property: ["brightness"]},
+
+  "border-color": {property: ["borderColor"]},
+  "border-top-color": {property: ["borderTopColor"]},
+  "border-right-color": {property: ["borderRightColor"]},
+  "border-bottom-color": {property: ["borderBottomColor"]},
+  "border-left-color": {property: ["borderLeftColor"]},
+
+  "border-style": {property: ["borderStyle"]},
+  "border-top-style": {property: ["border-top-style"]},
+  "border-right-style": {property: ["border-right-style"]},
+  "border-bottom-style": {property: ["border-bottom-style"]},
+  "border-left-style": {property: ["border-left-style"]},
+
+  "border-width": {property: ["borderWidth"]},
+  "border-top-width": {property: ["borderTopWidth"]},
+  "border-right-width": {property: ["borderRightWidth"]},
+  "border-bottom-width": {property: ["borderBottomWidth"]},
+  "border-left-width": {property: ["borderLeftWidth"]},
+
+  "border-radius": {property: ["borderRadius"]},
+  "border-top-left-radius": {property: ["borderRadiusTopLeft"]},
+  "border-top-right-radius": {property: ["borderRadiusTopRight"]},
+  "border-bottom-left-radius": {property: ["borderRadiusBottomLeft"]},
+  "border-bottom-right-radius": {property: ["borderRadiusBottomRight"]},
+  "border-start-start-radius": {property: ["borderRadius-startStart"]},
+  "border-start-end-radius": {property: ["borderRadius-startEnd"]},
+  "border-end-end-radius": {property: ["borderRadius-endEnd"]},
+  "border-end-start-radius": {property: ["borderRadius-endStart"]},
+
+  "border-spacing": {property: ["borderSpacing"]},
+  "border-collapse": {property: ["borderCollapse"]},
+
+  "box-shadow": {property: ["boxShadow"]},
+  "box-sizing": {property: ["box-sizing"]},
+  
+  "box-decoration-break": {property: ["box-decoration-break"]},
+  "break-after": {property: ["break-after"]},
+  "break-before": {property: ["break-before"]},
+  "break-inside": {property: ["break-inside"]},
+  
+  "columns": {property: ["columns"]},
+  "cursor": {property: ["cursor"]},
+
+  "flex": {property: ["flexGrow", "flexShrink", "flexBasis"]},
+  "flex-basis": {property: ["flexBasis"]},
+  "flex-shrink": {property: ["flexShrink"]},
+  "flex-grow": {property: ["flexGrow"]},
+  "flex-direction": {property: ["flex-direction"]},
+  "flex-wrap": {property: ["flex-wrap"]},
+  "flex-flow": {property : ["flex-direction" ,"flex-wrap"]},
+
+  "font-weight": {property: ["fontWeight"]},
+  "font-family": {property: ["fontFamily"]},
+  "font-size": {property: ["fontSize"]},
+  "font-variant-numeric": {property: ["font-variant-numeric"]},
+  "font-style": {property: ["font-style"]},
+
+  "grid-auto-columns": {property: ["gridAutoColumns"]},
+  "grid-auto-rows": {property: ["gridAutoRows"]},
+  "grid-area": {property: ["gridRowStart", "gridColumnStart", "gridRowEnd", "gridColumnEnd"]},
+  "grid-column": {property:["gridColumn"]},
+  "grid-column-end": {property: ["gridColumnEnd"]},
+  "grid-column-start": {property: ["gridColumnStart"]},
+  "grid-row": {property: ["gridRow"]},
+  "grid-row-end": {property: ["gridRowEnd"]},
+  "grid-row-start": {property: ["gridRowStart"]},
+  "grid-template-columns": {property: ["gridTemplateColumns"]},
+  "grid-template-rows": {property: ["gridTemplateRows"]},
+  "grid-auto-flow": {property: ["grid-auto-flow"]},
+  "grid-template-areas": {property: ["grid-template-areas"]},
+  "grid": {property: ["gridTemplateRows", "gridTemplateColumns", "grid-template-areas", "gridAutoRows", "gridAutoColumns", "grid-auto-flow"]},
+
+  "word-break": {property: ["word-break"]},
+}

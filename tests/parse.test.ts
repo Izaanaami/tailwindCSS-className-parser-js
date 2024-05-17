@@ -12,7 +12,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'margin',
       value: '1rem',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -23,7 +24,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'width',
       value: '12rem',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -34,7 +36,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'fontSize',
       value: '0.875rem',
-      relatedProperties: { lineHeight: '1.25rem' }
+      relatedProperties: { lineHeight: '1.25rem' },
+      isImportant: false
     });
   });
 
@@ -45,7 +48,8 @@ describe('parse', () => {
       pseudoModifier: 'hover',
       property: 'textColor',
       value: '#2563eb',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -56,7 +60,8 @@ describe('parse', () => {
       pseudoModifier: 'hover',
       property: 'backgroundColor',
       value: '#dcfce7',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -67,7 +72,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'position',
       value: 'absolute',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -78,7 +84,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'fontFamily',
       value: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -89,7 +96,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'display',
       value: 'flex',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -100,7 +108,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'backgroundColor',
       value: '#fecaca80',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -111,7 +120,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'right',
       value: '50%',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -133,7 +143,8 @@ describe('parse', () => {
         clip: 'rect(0, 0, 0, 0)',
         whiteSpace: 'nowrap',
         borderWidth: '0'
-      }
+      },
+      isImportant: false
     });
   });
 
@@ -144,7 +155,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'display',
       value: 'block',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -156,7 +168,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'backgroundColor',
       value: '#dcfce7',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -167,7 +180,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'ERROR',
       value: 'ERROR',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -178,7 +192,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'dropShadow',
       value: '0 4px 3px rgb(0 0 0 / 0.07), 0 2px 2px rgb(0 0 0 / 0.06)',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -189,7 +204,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'margin',
       value: '-16rem',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 
@@ -200,7 +216,8 @@ describe('parse', () => {
       pseudoModifier: null,
       property: 'backgroundColor',
       value: '#fecaca80',
-      relatedProperties: {}
+      relatedProperties: {},
+      isImportant: false
     });
   });
 });

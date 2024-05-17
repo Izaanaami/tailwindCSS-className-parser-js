@@ -95,8 +95,13 @@ const Tailwind = (config?: Config) => {
       classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
-    // check named classes first
-    if (namedClassProperties[classNameWithoutModifiers]) {
+    // check arbitrary properties
+    if(isArbitraryProperty) {
+      const arbitraryPropertyWithoutBrackets = classNameWithoutModifiers.replace("[", "") + classNameWithoutModifiers.replace("]", "");
+      propertyValue = arbitraryPropertyWithoutBrackets.split(":")[1];
+    }
+    // check named classes
+    else if (namedClassProperties[classNameWithoutModifiers]) {
       const styles = namedClassProperties[classNameWithoutModifiers];
       if (Object.keys(styles).length > 1) {
         propertyName = 'composite';
@@ -188,7 +193,8 @@ const Tailwind = (config?: Config) => {
       pseudoModifier,
       property: propertyName,
       value: isNegative ? '-' + propertyValue : propertyValue,
-      relatedProperties
+      relatedProperties,
+      isImportant
     };
   };
 
