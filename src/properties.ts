@@ -682,6 +682,12 @@ export const arbitraryProperties : ArbitraryProperties = {
   "columns": {property: ["columns"]},
   "cursor": {property: ["cursor"]},
 
+  "caret": {property: ["caretColor", "caret-shape"]},
+  "caret-color": {property: ["caretColor"]},
+  "caret-shape": {property: ["caret-shape"]},
+
+  "fill": {property: ["fill"]},
+
   "flex": {property: ["flexGrow", "flexShrink", "flexBasis"]},
   "flex-basis": {property: ["flexBasis"]},
   "flex-shrink": {property: ["flexShrink"]},
@@ -716,7 +722,6 @@ export const arbitraryProperties : ArbitraryProperties = {
   "grid": {property: ["gridTemplateRows", "gridTemplateColumns", "grid-template-areas", "gridAutoRows", "gridAutoColumns", "grid-auto-flow"]},
 
   "height": {property: ["height"]},
-  "width": {property: ["width"]},
 
   "inset": {property: ["inset"]},
   "top": {property: ["top"]},
@@ -799,6 +804,9 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-webkit-text-stroke-color": {property: ["-webkit-text-stroke-color"]},
   "-webkit-text-stroke-width": {property: ["-webkit-text-stroke-width"]},
   
+  "text-indent": {property: ["textIndent"]},
+  "text-underline-offset": {property: ["textUnderlineOffset"]},
+  
   "text-decoration": {property: ["text-decoration-line", "text-textDecorationStyle" ,"textDecorationColor", "textDecorationThickness"]},
   "text-decoration-color": {property: ["textDecorationColor"]},
   "text-decoration-thickness": {property: ["textDecorationThickness"]},
@@ -808,6 +816,22 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-moz-text-decoration-style": {property: ["-moz-text-decoration-style"]},
   "-moz-text-decoration-line": {property: ["-moz-text-decoration-line"]},
   "-moz-text-decoration-color": {property: ["-moz-text-decoration-color"]},
+
+  "transition": {property: ["transition"]},
+  "transition-delay": {property: ["transitionDelay"]},
+  "transition-duration": {property: ["transitionDuration"]},
+  "transition-timing-function": {property: ["transitionTimingFunction"]},
   
+  "transform": {property: ["transform"]},
+  "transform-origin": {property: ["transformOrigin"]},
+  "transform-style": {property: ["transformStyle"]},
+  "transform-box": {property: ["transformBox"]},
+  
+  "translate": {property: ["translate"]},
+  
+  "width": {property: ["width"]},
+  "will-change": {property: ["willChange"]},
   "word-break": {property: ["word-break"]},
+
+  "z-index": {property: ["zIndex"]},
 }
