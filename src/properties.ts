@@ -721,6 +721,14 @@ export const arbitraryProperties : ArbitraryProperties = {
   "min-width": {property: ["minWidth"]},
 
   "object-position": {property: ["objectPosition"]},
+  "opacity": {property: ["opacity"]},
+  "order": {property: ["order"]},
+  
+  "outline": {property: ["outline-style", "outlineWidth", "outlineColor"]},
+  "outline-offset": {property: ["outlineOffset"]},
+  "outline-width": {property: ["outlineWidth"]},
+  "outline-style": {property: ["outline-style"]},
+  "outline-color": {property: ["outlineColor"]},
 
   "word-break": {property: ["word-break"]},
 }
