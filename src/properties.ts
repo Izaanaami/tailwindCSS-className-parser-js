@@ -628,9 +628,11 @@ export const arbitraryProperties : ArbitraryProperties = {
   "background-repeat": {property: ["background-repeat"]},
   "background-origin": {property: ["background-origin"]},
 
+  // filters
   "backdrop-filter": {property: ["backdrop-filter"]},
-  "blur": {property: ["blur"]},
-  "brightness": {property: ["brightness"]},
+  "-webkit-backdrop-filter": {property: ["-webkit-backdrop-filter"]},
+  "filter": {property: ["filter"]},
+  "-webkit-filter": {property: ["-webkit-filter"]},
 
   "border": {property: ["borderWidth", "borderStyle", "borderColor"]},
   "border-color": {property: ["borderColor"]},
