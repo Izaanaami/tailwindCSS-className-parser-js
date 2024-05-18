@@ -724,6 +724,12 @@ export const arbitraryProperties : ArbitraryProperties = {
   "margin-bottom": {property: ["marginBottom"]},
   "margin-left": {property: ["marginLeft"]},
 
+  "padding": {property: ["padding"]},
+  "padding-top": {property: ["paddingTop"]},
+  "padding-right": {property: ["paddingRight"]},
+  "padding-bottom": {property: ["paddingBottom"]},
+  "padding-left": {property: ["paddingLeft"]},
+
   "letter-spacing": {property: ["letterSpacing"]},
   "line-height": {property: ["lineHeight"]},
   "line-break": {property: ["line-break"]},
