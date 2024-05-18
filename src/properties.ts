@@ -678,6 +678,7 @@ export const arbitraryProperties : ArbitraryProperties = {
   "break-before": {property: ["break-before"]},
   "break-inside": {property: ["break-inside"]},
   
+  "color": {property: ["color"]},
   "columns": {property: ["columns"]},
   "cursor": {property: ["cursor"]},
 
@@ -798,6 +799,15 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-webkit-text-stroke-color": {property: ["-webkit-text-stroke-color"]},
   "-webkit-text-stroke-width": {property: ["-webkit-text-stroke-width"]},
   
-
+  "text-decoration": {property: ["text-decoration-line", "text-textDecorationStyle" ,"textDecorationColor", "textDecorationThickness"]},
+  "text-decoration-color": {property: ["textDecorationColor"]},
+  "text-decoration-thickness": {property: ["textDecorationThickness"]},
+  "text-decoration-style": {property: ["textDecorationStyle"]},
+  "text-decoration-line": {property: ["text-decoration-line"]},
+  "text-decoration-skip-ink": {property: ["text-decoration-skip-ink"]},
+  "-moz-text-decoration-style": {property: ["-moz-text-decoration-style"]},
+  "-moz-text-decoration-line": {property: ["-moz-text-decoration-line"]},
+  "-moz-text-decoration-color": {property: ["-moz-text-decoration-color"]},
+  
   "word-break": {property: ["word-break"]},
 }
