@@ -712,6 +712,12 @@ export const arbitraryProperties : ArbitraryProperties = {
 
   "height": {property: ["height"]},
 
+  "inset": {property: ["inset", "top", "right", "bottom", "left"]},
+  "top": {property: ["top"]},
+  "right": {property: ["right"]},
+  "bottom": {property: ["bottom"]},
+  "left": {property: ["left"]},
+
   "letter-spacing": {property: ["letterSpacing"]},
   "line-height": {property: ["lineHeight"]},
   "line-break": {property: ["line-break"]},
