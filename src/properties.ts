@@ -208,13 +208,15 @@ export const properties: Properties = {
   rotate: { prefix: 'rotate', scale: 'rotate' },
   scale: { prefix: 'scale', scale: 'scale' },
 
-  scrollMargin: { prefix: 'scroll-m', scale: 'scrollMargin' },
-  scrollMarginTop: { prefix: 'scroll-mt', scale: 'scrollMargin' },
-  scrollMarginRight: { prefix: 'scroll-mr', scale: 'scrollMargin' },
-  scrollMarginBottom: { prefix: 'scroll-mb', scale: 'scrollMargin' },
-  scrollMarginLeft: { prefix: 'scroll-ml', scale: 'scrollMargin' },
-  scrollMarginX: { prefix: 'scroll-mx', scale: 'scrollMargin' },
-  scrollMarginY: { prefix: 'scroll-my', scale: 'scrollMargin' },
+  scrollMargin: { prefix: 'scroll-m', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginTop: { prefix: 'scroll-mt', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginRight: { prefix: 'scroll-mr', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginBottom: { prefix: 'scroll-mb', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginLeft: { prefix: 'scroll-ml', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginX: { prefix: 'scroll-mx', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginY: { prefix: 'scroll-my', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginInlineStart: { prefix: 'scroll-ms', scale: 'scrollMargin' , supportsNegativeValues: true},
+  scrollMarginInlineEnd: { prefix: 'scroll-me', scale: 'scrollMargin' , supportsNegativeValues: true},
 
   scrollPadding: { prefix: 'scroll-p', scale: 'scrollPadding' },
   scrollPaddingTop: { prefix: 'scroll-pt', scale: 'scrollPadding' },
@@ -711,24 +713,13 @@ export const arbitraryProperties : ArbitraryProperties = {
   "grid": {property: ["gridTemplateRows", "gridTemplateColumns", "grid-template-areas", "gridAutoRows", "gridAutoColumns", "grid-auto-flow"]},
 
   "height": {property: ["height"]},
+  "width": {property: ["width"]},
 
   "inset": {property: ["inset"]},
   "top": {property: ["top"]},
   "right": {property: ["right"]},
   "bottom": {property: ["bottom"]},
   "left": {property: ["left"]},
-
-  "margin": {property: ["margin"]},
-  "margin-top": {property: ["marginTop"]},
-  "margin-right": {property: ["marginRight"]},
-  "margin-bottom": {property: ["marginBottom"]},
-  "margin-left": {property: ["marginLeft"]},
-
-  "padding": {property: ["padding"]},
-  "padding-top": {property: ["paddingTop"]},
-  "padding-right": {property: ["paddingRight"]},
-  "padding-bottom": {property: ["paddingBottom"]},
-  "padding-left": {property: ["paddingLeft"]},
 
   "letter-spacing": {property: ["letterSpacing"]},
   "line-height": {property: ["lineHeight"]},
@@ -738,12 +729,18 @@ export const arbitraryProperties : ArbitraryProperties = {
   "list-style-type": {property: ["listStyleType"]},
   "list-style-position": {property: ["list-style-position"]},
   "list-style-image": {property: ["list-style-image"]},
-
+  
   "max-height": {property: ["maxHeight"]},
   "max-width": {property: ["maxWidth"]},
   "min-height": {property: ["minHeight"]},
   "min-width": {property: ["minWidth"]},
-
+  
+  "margin": {property: ["margin"]},
+  "margin-top": {property: ["marginTop"]},
+  "margin-right": {property: ["marginRight"]},
+  "margin-bottom": {property: ["marginBottom"]},
+  "margin-left": {property: ["marginLeft"]},
+  
   "object-position": {property: ["objectPosition"]},
   "opacity": {property: ["opacity"]},
   "order": {property: ["order"]},
@@ -753,6 +750,27 @@ export const arbitraryProperties : ArbitraryProperties = {
   "outline-width": {property: ["outlineWidth"]},
   "outline-style": {property: ["outline-style"]},
   "outline-color": {property: ["outlineColor"]},
+  
+  "padding": {property: ["padding"]},
+  "padding-top": {property: ["paddingTop"]},
+  "padding-right": {property: ["paddingRight"]},
+  "padding-bottom": {property: ["paddingBottom"]},
+  "padding-left": {property: ["paddingLeft"]},
+
+  "scale": {property: ["scale"]},
+  "rotate": {property: ["rotate"]},
+
+  "scroll-margin": {property: ["scrollMargin"]},
+  "scroll-margin-top": {property: ["scrollMarginTop"]},
+  "scroll-margin-right": {property: ["scrollMarginRight"]},
+  "scroll-margin-bottom": {property: ["scrollMarginBottom"]},
+  "scroll-margin-left": {property: ["scrollMarginLeft"]},
+  "scroll-margin-inline": {property: ["scrollMarginInlineStart", "scrollMarginInlineEnd"]},
+  "scroll-margin-inline-start": {property: ["scrollMarginInlineStart"]},
+  "scroll-margin-inline-end": {property: ["scrollMarginInlineEnd"]},
+  "scroll-margin-block": {property: ["scroll-margin-block-start", "scroll-margin-block-end"]},
+  "scroll-margin-block-start": {property: ["scroll-margin-block-start"]},
+  "scroll-margin-block-end": {property: ["scroll-margin-block-end"]},
 
   "stroke": {property: ["stroke"]},
   "stroke-width": {property: ["strokeWidth"]},
