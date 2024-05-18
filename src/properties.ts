@@ -691,6 +691,10 @@ export const arbitraryProperties : ArbitraryProperties = {
   "font-variant-numeric": {property: ["font-variant-numeric"]},
   "font-style": {property: ["font-style"]},
 
+  "gap": {property: ["gap"]},
+  "row-gap": {property: ["rowGap"]},
+  "column-gap": {property: ["columnGap"]},
+
   "grid-auto-columns": {property: ["gridAutoColumns"]},
   "grid-auto-rows": {property: ["gridAutoRows"]},
   "grid-area": {property: ["gridRowStart", "gridColumnStart", "gridRowEnd", "gridColumnEnd"]},
