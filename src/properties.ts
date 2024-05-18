@@ -225,6 +225,8 @@ export const properties: Properties = {
   scrollPaddingLeft: { prefix: 'scroll-pl', scale: 'scrollPadding' },
   scrollPaddingX: { prefix: 'scroll-px', scale: 'scrollPadding' },
   scrollPaddingY: { prefix: 'scroll-py', scale: 'scrollPadding' },
+  scrollPaddingInlineStart: { prefix: 'scroll-ps', scale: 'scrollPadding'},
+  scrollPaddingInlineEnd: { prefix: 'scroll-pe', scale: 'scrollPadding'},
 
   skew: { prefix: 'skew', scale: 'skew' },
   spaceX: { prefix: 'space-x', scale: 'space' },
@@ -771,6 +773,18 @@ export const arbitraryProperties : ArbitraryProperties = {
   "scroll-margin-block": {property: ["scroll-margin-block-start", "scroll-margin-block-end"]},
   "scroll-margin-block-start": {property: ["scroll-margin-block-start"]},
   "scroll-margin-block-end": {property: ["scroll-margin-block-end"]},
+
+  "scroll-padding": {property: ["scrollPadding"]},
+  "scroll-padding-top": {property: ["scrollPaddingTop"]},
+  "scroll-padding-right": {property: ["scrollPaddingRight"]},
+  "scroll-padding-bottom": {property: ["scrollPaddingBottom"]},
+  "scroll-padding-left": {property: ["scrollPaddingLeft"]},
+  "scroll-padding-inline": {property: ["scrollPaddingInlineStart", "scrollPaddingInlineEnd"]},
+  "scroll-padding-inline-start": {property: ["scrollPaddingInlineStart"]},
+  "scroll-padding-inline-end": {property: ["scrollPaddingInlineEnd"]},
+  "scroll-padding-block": {property: ["scroll-padding-block-start", "scroll-padding-block-end"]},
+  "scroll-padding-block-start": {property: ["scroll-padding-block-start"]},
+  "scroll-padding-block-end": {property: ["scroll-padding-block-end"]},
 
   "stroke": {property: ["stroke"]},
   "stroke-width": {property: ["strokeWidth"]},
