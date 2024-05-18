@@ -730,5 +730,18 @@ export const arbitraryProperties : ArbitraryProperties = {
   "outline-style": {property: ["outline-style"]},
   "outline-color": {property: ["outlineColor"]},
 
+  "stroke": {property: ["stroke"]},
+  "stroke-width": {property: ["strokeWidth"]},
+  "stroke-dashoffset": {property: ["stroke-dashoffset"]},
+  "stroke-dasharray": {property: ["stroke-dasharray"]},
+  "stroke-linecap": {property: ["stroke-linecap"]},
+  "stroke-opacity": {property: ["stroke-opacity"]},
+  "stroke-linejoin": {property: ["stroke-linejoin"]},
+  "stroke-miterlimit": {property: ["stroke-miterlimit"]},
+  "-webkit-text-stroke": {property: ["-webkit-text-stroke"]},
+  "-webkit-text-stroke-color": {property: ["-webkit-text-stroke-color"]},
+  "-webkit-text-stroke-width": {property: ["-webkit-text-stroke-width"]},
+  
+
   "word-break": {property: ["word-break"]},
 }
