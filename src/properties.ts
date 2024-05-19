@@ -615,16 +615,30 @@ export const arbitraryProperties : ArbitraryProperties = {
   "aspect-ratio" : { property: ["aspectRatio"]},
   "appearance": {property: ["appearance"]},
   "accent-color": {property: ["accentColor"]},
+  "all": {property: ["all"]},
+  
   "animation": {property: ["animation"]},
+  "animation-delay": {property: ["animation-delay"]},
+  "animation-direction": {property: ["animation-direction"]},
+  "animation-fill-mode": {property: ["animation-fill-mode"]},
+  "animation-iteration-count": {property: ["animation-iteration-count"]},
+  "animation-play-state": {property: ["animation-play-state"]},
+  "animation-timing-function": {property: ["animation-timing-function"]},
+
   
   "align-content": {property: ["align-content"]},
   "align-items": {property: ["align-items"]},
   "align-self": {property: ["align-self"]},
 
   "backdrop-filter": {property: ["backdrop-filter"]},
+
+  "backface-visibility": {property: ["backface-visibility"]},
+  "-webkit-backface-visibility": {property: ["-webkit-backface-visibility"]},
   
   "background-image": { property: ["backgroundImage"]},
   "background-position": { property: ["backgroundPosition"]},
+  "background-position-x": { property: ["background-position-x"]},
+  "background-position-y": { property: ["background-position-y"]},
   "background-size": { property: ["backgroundSize"]},
   "background-blend-mode": { property: ["background-blend-mode"]},
   "background-clip": { property: ["background-clip"]},
@@ -635,6 +649,24 @@ export const arbitraryProperties : ArbitraryProperties = {
   "background-origin": {property: ["background-origin"]},
 
   "border": {property: ["borderWidth", "borderStyle", "borderColor"]},
+  "border-left": {property: ["border-left-width", "border-left-style", "border-left-color"]},
+  "border-right": {property: ["border-right-width", "border-right-style", "border-right-color"]},
+  "border-bottom": {property: ["border-bottom-width", "border-bottom-style", "border-bottom-color"]},
+  "border-top": {property: ["border-top-width", "border-top-style", "border-left-color"]},
+
+  "border-block": { property: ["border-block-width", "border-block-style", "border-block-color"]},
+  "border-block-color": { property: ["border-block-color"]},
+  "border-block-end": { property: ["border-block-end-width", "border-block-end-style", "border-block-end-color"]},
+  "border-block-end-color": { property: ["border-block-end-color"]},
+  "border-block-end-style": { property: ["border-block-end-style"]},
+  "border-block-end-width": { property: ["border-block-end-width"]},
+  "border-block-start": { property: ["border-block-start-width", "border-block-start-style", "border-block-start-color"]},
+  "border-block-start-color": { property: ["border-block-start-color"]},
+  "border-block-start-style": { property: ["border-block-start-style"]},
+  "border-block-start-width": { property: ["border-block-start-width"]},
+  "border-block-style": { property: ["border-block-style"]},
+  "border-block-width": { property: ["border-block-width"]},
+  
   "border-color": {property: ["borderColor"]},
   "border-top-color": {property: ["borderTopColor"]},
   "border-right-color": {property: ["borderRightColor"]},
@@ -663,6 +695,26 @@ export const arbitraryProperties : ArbitraryProperties = {
   "border-end-end-radius": {property: ["borderRadius-endEnd"]},
   "border-end-start-radius": {property: ["borderRadius-endStart"]},
 
+  "border-image": { property: ["border-image-outset", "border-image-repeat", "border-image-slice", "border-image-source", "border-image-width"]},
+  "border-image-outset": { property: ["border-image-outset"]},
+  "border-image-repeat": { property: ["border-image-repeat"]},
+  "border-image-slice": { property: ["border-image-slice"]},
+  "border-image-source": { property: ["border-image-source"]},
+  "border-image-width": { property: ["border-image-width"]},
+
+  "border-inline": { property: ["border-inline-width", "border-inline-style", "border-inline-color"]},
+  "border-inline-color": { property: ["border-inline-color"]},
+  "border-inline-end": { property: ["border-inline-end-width", "border-inline-end-style", "border-inline-end-color"]},
+  "border-inline-end-color": { property: ["border-inline-end-color"]},
+  "border-inline-end-style": { property: ["border-inline-end-style"]},
+  "border-inline-end-width": { property: ["border-inline-end-width"]},
+  "border-inline-start": { property: ["border-inline-start-width", "border-inline-start-style", "border-inline-start-color"]},
+  "border-inline-start-color": { property: ["border-inline-start-color"]},
+  "border-inline-start-style": { property: ["border-inline-start-style"]},
+  "border-inline-start-width": { property: ["border-inline-start-width"]},
+  "border-inline-style": { property: ["border-inline-style"]},
+  "border-inline-width": { property: ["border-inline-width"]},
+  
   "border-spacing": {property: ["borderSpacing"]},
   "border-collapse": {property: ["borderCollapse"]},
 
@@ -673,6 +725,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "break-after": {property: ["break-after"]},
   "break-before": {property: ["break-before"]},
   "break-inside": {property: ["break-inside"]},
+
+  "block-size": { property: ["block-size"]},
   
   "color": {property: ["color"]},
   "columns": {property: ["columns"]},
