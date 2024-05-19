@@ -445,7 +445,7 @@ export const namedClassProperties = {
     margin: '0',
     overflow: 'visible',
     clip: 'auto',
-    whiteSpace: 'normal'
+    "white-space": 'normal'
   },
   'object-contain': { 'object-fit': 'contain' },
   'object-cover': { 'object-fit': 'cover' },
@@ -549,7 +549,7 @@ export const namedClassProperties = {
     margin: '-1px',
     overflow: 'hidden',
     clip: 'rect(0, 0, 0, 0)',
-    whiteSpace: 'nowrap',
+    "white-space": 'nowrap',
     borderWidth: '0'
   },
   'stacked-fractions': { 'font-variant-numeric': 'stacked-fractions' },
@@ -621,6 +621,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "align-items": {property: ["align-items"]},
   "align-self": {property: ["align-self"]},
 
+  "backdrop-filter": {property: ["backdrop-filter"]},
+  
   "background-image": { property: ["backgroundImage"]},
   "background-position": { property: ["backgroundPosition"]},
   "background-size": { property: ["backgroundSize"]},
@@ -631,12 +633,6 @@ export const arbitraryProperties : ArbitraryProperties = {
   "background-attachment": {property: ["background-attachment"]},
   "background-repeat": {property: ["background-repeat"]},
   "background-origin": {property: ["background-origin"]},
-
-  // filters
-  "backdrop-filter": {property: ["backdrop-filter"]},
-  "-webkit-backdrop-filter": {property: ["-webkit-backdrop-filter"]},
-  "filter": {property: ["filter"]},
-  "-webkit-filter": {property: ["-webkit-filter"]},
 
   "border": {property: ["borderWidth", "borderStyle", "borderColor"]},
   "border-color": {property: ["borderColor"]},
@@ -681,12 +677,18 @@ export const arbitraryProperties : ArbitraryProperties = {
   "color": {property: ["color"]},
   "columns": {property: ["columns"]},
   "cursor": {property: ["cursor"]},
+  "clear": {property: ["clear"]},
+  "clip": {property: ["clip"]},
 
   "caret": {property: ["caretColor", "caret-shape"]},
   "caret-color": {property: ["caretColor"]},
   "caret-shape": {property: ["caret-shape"]},
+  "content": {property: ["content"]},
+
+  "display": {property: ["display"]},
 
   "fill": {property: ["fill"]},
+  "filter": {property: ["filter"]},
 
   "flex": {property: ["flexGrow", "flexShrink", "flexBasis"]},
   "flex-basis": {property: ["flexBasis"]},
@@ -695,6 +697,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "flex-direction": {property: ["flex-direction"]},
   "flex-wrap": {property: ["flex-wrap"]},
   "flex-flow": {property : ["flex-direction" ,"flex-wrap"]},
+
+  "float": {property: ["float"]},
 
   "font-weight": {property: ["fontWeight"]},
   "font-family": {property: ["fontFamily"]},
@@ -723,6 +727,12 @@ export const arbitraryProperties : ArbitraryProperties = {
 
   "height": {property: ["height"]},
 
+  "isolation" : {property: ["isolation"]},
+
+  "justify-content": {property: ["justify-content"]},
+  "justify-items": {property: ["justify-items"]},
+  "justify-self": {property: ["justify-self"]},
+
   "inset": {property: ["inset"]},
   "top": {property: ["top"]},
   "right": {property: ["right"]},
@@ -749,7 +759,11 @@ export const arbitraryProperties : ArbitraryProperties = {
   "margin-bottom": {property: ["marginBottom"]},
   "margin-left": {property: ["marginLeft"]},
   
+  "mix-blend-mode": {property: ["mix-blend-mode"]},
+  
   "object-position": {property: ["objectPosition"]},
+  "object-fit": {property: ["object-fit"]},
+
   "opacity": {property: ["opacity"]},
   "order": {property: ["order"]},
   
@@ -759,14 +773,37 @@ export const arbitraryProperties : ArbitraryProperties = {
   "outline-style": {property: ["outline-style"]},
   "outline-color": {property: ["outlineColor"]},
   
+  "overflow": {property: ["overflow"]},
+  "overflow-x": {property: ["overflow-x"]},
+  "overflow-y": {property: ["overflow-y"]},
+  "overflow-wrap": {property: ["overflow-wrap"]},
+
+  "overscroll-behavior": {property: ["overscroll-behavior"]},
+  "overscroll-behavior-x": {property: ["overscroll-behavior-x"]},
+  "overscroll-behavior-y": {property: ["overscroll-behavior-y"]},
+
   "padding": {property: ["padding"]},
   "padding-top": {property: ["paddingTop"]},
   "padding-right": {property: ["paddingRight"]},
   "padding-bottom": {property: ["paddingBottom"]},
   "padding-left": {property: ["paddingLeft"]},
 
+  "place-content": {property: ["place-content"]},
+  "place-items": {property: ["place-items"]},
+  "place-self": {property: ["place-self"]},
+  
+  "position": {property: ["position"]},
+  "pointer-events": {property: ["pointer-events"]},
+
   "scale": {property: ["scale"]},
+
+  "resize": {property: ["resize"]},
   "rotate": {property: ["rotate"]},
+
+  "scroll-behavior": {property: ["scroll-behavior"]},
+  "scroll-snap": {property: ["scroll-snap"]},
+  "scroll-align": {property: ["scroll-align"]},
+  "scroll-stop": {property: ["scroll-stop"]},
 
   "scroll-margin": {property: ["scrollMargin"]},
   "scroll-margin-top": {property: ["scrollMarginTop"]},
@@ -804,8 +841,13 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-webkit-text-stroke-color": {property: ["-webkit-text-stroke-color"]},
   "-webkit-text-stroke-width": {property: ["-webkit-text-stroke-width"]},
   
+  "table-layout": {property: ["table-layout"]},
+  
   "text-indent": {property: ["textIndent"]},
   "text-underline-offset": {property: ["textUnderlineOffset"]},
+  "text-transform": {property: ["text-transform"]},
+  "text-overflow": {property: ["text-overflow"]},
+  "text-align": {property: ["text-align"]},
   
   "text-decoration": {property: ["text-decoration-line", "text-textDecorationStyle" ,"textDecorationColor", "textDecorationThickness"]},
   "text-decoration-color": {property: ["textDecorationColor"]},
@@ -817,6 +859,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-moz-text-decoration-line": {property: ["-moz-text-decoration-line"]},
   "-moz-text-decoration-color": {property: ["-moz-text-decoration-color"]},
 
+  "touch-action": {property: ["touch-action"]},
+  
   "transition": {property: ["transition"]},
   "transition-delay": {property: ["transitionDelay"]},
   "transition-duration": {property: ["transitionDuration"]},
@@ -828,10 +872,23 @@ export const arbitraryProperties : ArbitraryProperties = {
   "transform-box": {property: ["transformBox"]},
   
   "translate": {property: ["translate"]},
+
+  "user-select": {property: ["user-select"]},
+  
+  "vertical-align": {property: ["vertical-align"]},
+  "visibility": {property: ["visibility"]},
   
   "width": {property: ["width"]},
   "will-change": {property: ["willChange"]},
   "word-break": {property: ["word-break"]},
+  "white-space": {property: ["white-space"]},
+  "white-space-collapse": {property: ["white-space-collapse"]},
 
   "z-index": {property: ["zIndex"]},
+
+  "-webkit-font-smoothing": {property: ["-webkit-font-smoothing"]},
+  "-moz-osx-font-smoothing": {property: ["-moz-osx-font-smoothing"]},
+
+  "-webkit-backdrop-filter": {property: ["-webkit-backdrop-filter"]},
+  "-webkit-filter": {property: ["-webkit-filter"]},
 }
