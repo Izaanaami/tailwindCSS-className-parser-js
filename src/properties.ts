@@ -224,7 +224,7 @@ export const properties: Properties = {
   "space-x": { prefix: 'space-x', scale: 'space' },
   "space-y": { prefix: 'space-y', scale: 'space' },
 
-  "text-color": { prefix: 'text', scale: 'colors' },
+  "color": { prefix: 'text', scale: 'colors' },
   "text-decoration-color": { prefix: 'decoration', scale: 'textDecorationColor' },
   "text-decoration-thickness": { prefix: 'decoration', scale: 'textDecorationThickness' },
   "text-indent": {
@@ -625,7 +625,7 @@ type ArbitraryProperties = {
   }
 }
 export const arbitraryProperties : ArbitraryProperties = {
-  "aspect-ratio" : { property: "aspectRatio"},
+  "aspect-ratio" : { property: "aspect-ratio"},
   "appearance": {property: "appearance"},
   "accent-color": {property: "accent-color"},
   "all": {property: "all"},
@@ -637,6 +637,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "animation-iteration-count": {property: "animation-iteration-count"},
   "animation-play-state": {property: "animation-play-state"},
   "animation-timing-function": {property: "animation-timing-function"},
+  "animation-duration" : {property: 'animation-duration'},
+  "animation-name" : {property: 'animation-name'},
 
   
   "align-content": {property: "align-content"},
@@ -649,7 +651,7 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-webkit-backface-visibility": {property: "-webkit-backface-visibility"},
   
   "background-image": { property: "background-image"},
-  "background-position": { property: "background-position"},
+  "background-position": { property: "background-position", composite: true, relatedProperties: ["background-position-x", "background-position-y"]},
   "background-position-x": { property: "background-position-x"},
   "background-position-y": { property: "background-position-y"},
   "background-size": { property: "background-size"},
@@ -664,8 +666,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "border": {property: "border", composite: true, relatedProperties: ["border-width", "border-style", "border-color"]},
   "border-left": {property: "border-left", composite: true, relatedProperties: ["border-left-width", "border-left-style", "border-left-color"]},
   "border-right": {property: "border-right", composite: true, relatedProperties: ["border-right-width", "border-right-style", "border-right-color"]},
-  "border-bottom": {property: "border-bottom", relatedProperties: ["border-bottom-width", "border-bottom-style", "border-bottom-color"]},
-  "border-top": {property: "border-top", relatedProperties: ["border-top-width", "border-top-style", "border-left-color"]},
+  "border-bottom": {property: "border-bottom", composite: true,relatedProperties: ["border-bottom-width", "border-bottom-style", "border-bottom-color"]},
+  "border-top": {property: "border-top", composite: true,relatedProperties: ["border-top-width", "border-top-style", "border-left-color"]},
 
   "border-block": { property: "border-block", composite: true, relatedProperties: ["border-block-width", "border-block-style", "border-block-color"]},
   "border-block-color": { property: "border-block-color", composite: true, relatedProperties: ["border-block-start-color", "border-block-end-color"]},
@@ -741,10 +743,27 @@ export const arbitraryProperties : ArbitraryProperties = {
 
   "block-size": { property: "block-size"},
   
-  "columns": {property: "columns", composite: true, relatedProperties: ["column-width", "column-count"]},
+  "color": {property: "color"},
   "cursor": {property: "cursor"},
   "clear": {property: "clear"},
+  "caption-side" : {property: 'caption-side'},
+
   "clip": {property: "clip"},
+  "clip-path" : {property: 'clip-path'},
+  
+  "columns": {property: "columns", composite: true, relatedProperties: ["column-width", "column-count"]},
+  "column-count" : {property: 'column-count'},
+  "column-fill" : {property: 'column-fill'},
+  "column-rule" : {property: 'column-rule', composite: true, relatedProperties: ["column-rule-width", "column-rule-style", "column-rule-color"]},
+  "column-rule-color" : {property: 'column-rule-color'},
+  "column-rule-style" : {property: 'column-rule-style'},
+  "column-rule-width" : {property: 'column-rule-width'},
+  "column-span" : {property: 'column-span'},
+  "column-width" : {property: 'column-width'},
+  
+  "counter-increment" : {property: 'counter-increment'},
+  "counter-reset" : {property: 'counter-reset'},
+  "counter-set" : {property: 'counter-set'},
 
   "caret": {property: "caret", composite: true, relatedProperties: ["caret-color", "caret-shape"]},
   "caret-color": {property: "caret-color"},
@@ -752,6 +771,9 @@ export const arbitraryProperties : ArbitraryProperties = {
   "content": {property: "content"},
 
   "display": {property: "display"},
+  "direction" : {property: 'direction'},
+
+  "empty-cells" : {property: 'empty-cells'},
 
   "fill": {property: "fill"},
   "filter": {property: "filter"},
@@ -766,6 +788,7 @@ export const arbitraryProperties : ArbitraryProperties = {
 
   "float": {property: "float"},
 
+  "font" : {property: 'font', composite: true, relatedProperties: ["font-style", "font-variant", "font-weight", "font-size", "line-height", "font-family"]},
   "font-weight": {property: "font-weight"},
   "font-family": {property: "font-family"},
   "font-size": {property: "font-size"},
@@ -775,6 +798,8 @@ export const arbitraryProperties : ArbitraryProperties = {
   "font-variant-caps": {property: "font-variant-caps"},
   "font-variant-numeric": {property: "font-variant-numeric"},
   "font-style": {property: "font-style"},
+  "font-feature-settings" : {property: 'font-feature-settings'},
+  "font-kerning" : {property: 'font-kerning'},
 
   "gap": {property: "gap", composite: true, relatedProperties: ["row-gap", "column-gap"]},
   "row-gap": {property: "row-gap"},
@@ -795,10 +820,25 @@ export const arbitraryProperties : ArbitraryProperties = {
   "grid-template-areas": {property: "grid-template-areas"},
   "grid-template": {property: "grid-template", composite: true, relatedProperties: ["grid-template-columns", "grid-template-rows", "grid-template-areas"]},
   "grid": {property: "grid", composite: true, relatedProperties: ["grid-template-rows", "grid-template-columns", "grid-template-areas", "grid-auto-rows", "grid-auto-columns", "grid-auto-flow"]},
+  "grid-column-gap" : {property: 'grid-column-gap'},
+  "grid-gap" : {property: 'grid-gap', composite: true, relatedProperties: ["grid-row-gap", "grid-column-gap"]},
+  "grid-row-gap" : {property: 'grid-row-gap'},
 
   "height": {property: "height"},
 
+  "hyphenate-character" : {property: 'hyphenate-character'},
+  "hyphens" : {property: 'hyphens'},
+
+  "image-rendering" : {property: 'image-rendering'},
   "isolation" : {property: "isolation"},
+
+  "inline-size" : {property: 'inline-size'},
+  "inset-block" : {property: 'inset-block', composite: true, relatedProperties: ["inset-block-start", "inset-block-end"]},
+  "inset-block-end" : {property: 'inset-block-end'},
+  "inset-block-start" : {property: 'inset-block-start'},
+  "inset-inline" : {property: 'inset-inline', composite: true, relatedProperties: ["inset-inline-start", "inset-inline-end"]},
+  "inset-inline-end" : {property: 'inset-inline-end'},
+  "inset-inline-start" : {property: 'inset-inline-start'},
 
   "justify-content": {property: "justify-content"},
   "justify-items": {property: "justify-items"},
@@ -819,24 +859,55 @@ export const arbitraryProperties : ArbitraryProperties = {
   "list-style-position": {property: "list-style-position"},
   "list-style-image": {property: "list-style-image"},
   
+  "mask-image" : {property: 'mask-image'},
+  "-webkit-mask-image" : {property: '-webkit-mask-image'},
+  "mask-mode" : {property: 'mask-mode'},
+  "mask-origin" : {property: 'mask-origin'},
+  "-webkit-mask-origin" : {property: '-webkit-mask-origin'},
+  "mask-position" : {property: 'mask-position'},
+  "-webkit-mask-position" : {property: '-webkit-mask-position'},
+  "mask-repeat" : {property: 'mask-repeat'},
+  "-webkit-mask-repeat" : {property: '-webkit-mask-repeat'},
+  "mask-size" : {property: 'mask-size'},
+  "-webkit-mask-size" : {property: '-webkit-mask-size'},
+  
   "max-height": {property: "max-height"},
   "max-width": {property: "max-width"},
   "min-height": {property: "min-height"},
   "min-width": {property: "min-width"},
+
+  "max-block-size" : {property: 'max-block-size'},
+  "max-inline-size" : {property: 'max-inline-size'},
+  "min-block-size" : {property: 'min-block-size'},
+  "min-inline-size" : {property: 'min-inline-size'},
   
   "margin": {property: "margin", composite: true, relatedProperties: ["margin-top", "margin-right", "margin-bottom", "margin-left"]},
   "margin-top": {property: "marginTop"},
   "margin-right": {property: "marginRight"},
   "margin-bottom": {property: "marginBottom"},
   "margin-left": {property: "marginLeft"},
+  "margin-block" : {property: 'margin-block', composite: true, relatedProperties: ["margin-block-start", "margin-block-end"]},
+  "margin-block-end" : {property: 'margin-block-end'},
+  "margin-block-start" : {property: 'margin-block-start'},
+  "margin-inline" : {property: 'margin-inline', composite: true, relatedProperties: ["margin-inline-start", "margin-inline-end"]},
+  "margin-inline-end" : {property: 'margin-inline-end'},
+  "margin-inline-start" : {property: 'margin-inline-start'},
+
   
   "mix-blend-mode": {property: "mix-blend-mode"},
   
   "object-position": {property: "object-position"},
   "object-fit": {property: "object-fit"},
 
+  "offset" : {property: 'offset', composite: true, relatedProperties: ["offset-anchor", "offset-distance", "offset-path", "offset-rotate"]},
+  "offset-anchor" : {property: 'offset-anchor'},
+  "offset-distance" : {property: 'offset-distance'},
+  "offset-path" : {property: 'offset-path'},
+  "offset-rotate" : {property: 'offset-rotate'},
+
   "opacity": {property: "opacity"},
   "order": {property: "order"},
+  "orphans" : {property: 'orphans'},
   
   "outline": {property: "outline", composite: true, relatedProperties: ["outline-style", "outline-width", "outline-color"]},
   "outline-offset": {property: "outline-offset"},
@@ -848,16 +919,33 @@ export const arbitraryProperties : ArbitraryProperties = {
   "overflow-x": {property: "overflow-x"},
   "overflow-y": {property: "overflow-y"},
   "overflow-wrap": {property: "overflow-wrap"},
+  "overflow-anchor" : {property: 'overflow-anchor'},
 
-  "overscroll-behavior": {property: "overscroll-behavior"},
+  "overscroll-behavior": {property: "overscroll-behavior", composite: true, relatedProperties: ["overscroll-behavior-x", "overscroll-behavior-y"]},
   "overscroll-behavior-x": {property: "overscroll-behavior-x"},
   "overscroll-behavior-y": {property: "overscroll-behavior-y"},
+  "overscroll-behavior-block" : {property: 'overscroll-behavior-block'},
+  "overscroll-behavior-inline" : {property: 'overscroll-behavior-inline'},
 
+  "page-break-after" : {property: 'page-break-after'},
+  "page-break-before" : {property: 'page-break-before'},
+  "page-break-inside" : {property: 'page-break-inside'},
+
+  "paint-order" : {property: 'paint-order'},
+  "perspective" : {property: 'perspective'},
+  "perspective-origin" : {property: 'perspective-origin'},
+  
   "padding": {property: "padding", composite: true, relatedProperties: ["padding-top", "padding-right", "padding-bottom", "padding-left"]},
   "padding-top": {property: "padding-top"},
   "padding-right": {property: "padding-right"},
   "padding-bottom": {property: "padding-bottom"},
   "padding-left": {property: "padding-left"},
+  "padding-block" : {property: 'padding-block', composite: true, relatedProperties: ["padding-block-start", "padding-block-end"]},
+  "padding-block-end" : {property: 'padding-block-end'},
+  "padding-block-start" : {property: 'padding-block-start'},
+  "padding-inline" : {property: 'padding-inline', composite: true, relatedProperties: ["padding-inline-start", "padding-inline-end"]},
+  "padding-inline-end" : {property: 'padding-inline-end'},
+  "padding-inline-start" : {property: 'padding-inline-start'},
 
   "place-content": {property: "place-content"},
   "place-items": {property: "place-items"},
@@ -866,13 +954,16 @@ export const arbitraryProperties : ArbitraryProperties = {
   "position": {property: "position"},
   "pointer-events": {property: "pointer-events"},
 
+  "quotes" : {property: 'quotes'},
+  
   "scale": {property: "scale"},
 
   "resize": {property: "resize"},
   "rotate": {property: "rotate"},
 
+  "scrollbar-color" : {property: 'scrollbar-color'},
+
   "scroll-behavior": {property: "scroll-behavior"},
-  "scroll-snap": {property: "scroll-snap"},
   "scroll-align": {property: "scroll-align"},
   "scroll-stop": {property: "scroll-stop"},
 
@@ -900,6 +991,10 @@ export const arbitraryProperties : ArbitraryProperties = {
   "scroll-padding-block-start": {property: "scroll-padding-block-start"},
   "scroll-padding-block-end": {property: "scroll-padding-block-end"},
 
+  "scroll-snap-align" : {property: 'scroll-snap-align'},
+  "scroll-snap-stop" : {property: 'scroll-snap-stop'},
+  "scroll-snap-type" : {property: 'scroll-snap-type'},
+  
   "stroke": {property: "stroke"},
   "stroke-width": {property: "stroke-width"},
   "stroke-dashoffset": {property: "stroke-dashoffset"},
@@ -913,14 +1008,24 @@ export const arbitraryProperties : ArbitraryProperties = {
   "-webkit-text-stroke-width": {property: "-webkit-text-stroke-width"},
   
   "table-layout": {property: "table-layout"},
+  "tab-size" : {property: 'tab-size'},
   
-  "text-color": {property: "text-color"},
   "text-indent": {property: "text-indent"},
   "text-underline-offset": {property: "text-underline-offset"},
   "text-transform": {property: "text-transform"},
   "text-overflow": {property: "text-overflow"},
   "text-align": {property: "text-align"},
+  "text-align-last" : {property: 'text-align-last'},
+  "text-justify" : {property: 'text-justify'},
+  "text-orientation" : {property: 'text-orientation'},
+  "text-shadow" : {property: 'text-shadow'},
+  "text-underline-position" : {property: 'text-underline-position'},
   
+  "text-emphasis" : {property: 'text-emphasis', composite: true, relatedProperties: ["text-emphasis-style", "text-emphasis-color"]},
+  "text-emphasis-color" : {property: 'text-emphasis-color'},
+  "text-emphasis-position" : {property: 'text-emphasis-position'},
+  "text-emphasis-style" : {property: 'text-emphasis-style'},
+
   "text-decoration": {property: "text-decoration", composite: true, relatedProperties: ["text-decoration-line", "text-text-decoration-style" ,"text-decoration-color", "text-decoration-thickness"]},
   "text-decoration-color": {property: "text-decoration-color"},
   "text-decoration-thickness": {property: "text-decoration-thickness"},
@@ -947,118 +1052,30 @@ export const arbitraryProperties : ArbitraryProperties = {
   "translate": {property: "translate"},
 
   "user-select": {property: "user-select"},
+  "unicode-bidi" : {property: 'unicode-bidi'},
   
   "vertical-align": {property: "vertical-align"},
   "visibility": {property: "visibility"},
   
   "width": {property: "width"},
   "will-change": {property: "will-change"},
-  "word-break": {property: "word-break"},
   "white-space": {property: "white-space"},
   "white-space-collapse": {property: "white-space-collapse"},
+  "widows" : {property: 'widows'},
+  "writing-mode" : {property: 'writing-mode'},
+  
+  "word-break": {property: "word-break"},
+  "word-spacing" : {property: 'word-spacing'},
+  "word-wrap" : {property: 'word-wrap'},
 
   "z-index": {property: "z-index"},
+
+  "-moz-tab-size": {property: "-moz-tab-size"},
 
   "-webkit-font-smoothing": {property: "-webkit-font-smoothing"},
   "-moz-osx-font-smoothing": {property: "-moz-osx-font-smoothing"},
 
+  "-webkit-box-reflect" : {property: '-webkit-box-reflect'},
   "-webkit-backdrop-filter": {property: "-webkit-backdrop-filter"},
   "-webkit-filter": {property: "-webkit-filter"},
-
-  // generated properties 
-  // TODO: add relatedProperties to composite ones
-
-"animation-duration" : {property: 'animation-duration'},
-"animation-name" : {property: 'animation-name'},
-"box-reflect" : {property: 'box-reflect'},
-"caption-side" : {property: 'caption-side'},
-"clip-path" : {property: 'clip-path'},
-"color" : {property: 'color'},
-"column-count" : {property: 'column-count'},
-"column-fill" : {property: 'column-fill'},
-"column-rule" : {property: 'column-rule'},
-"column-rule-color" : {property: 'column-rule-color'},
-"column-rule-style" : {property: 'column-rule-style'},
-"column-rule-width" : {property: 'column-rule-width'},
-"column-span" : {property: 'column-span'},
-"column-width" : {property: 'column-width'},
-"counter-increment" : {property: 'counter-increment'},
-"counter-reset" : {property: 'counter-reset'},
-"counter-set" : {property: 'counter-set'},
-"direction" : {property: 'direction'},
-"empty-cells" : {property: 'empty-cells'},
-"font" : {property: 'font'},
-"font-feature-settings" : {property: 'font-feature-settings'},
-"font-kerning" : {property: 'font-kerning'},
-"grid-column-gap" : {property: 'grid-column-gap'},
-"grid-gap" : {property: 'grid-gap'},
-"grid-row-gap" : {property: 'grid-row-gap'},
-"hanging-punctuation" : {property: 'hanging-punctuation'},
-"hyphenate-character" : {property: 'hyphenate-character'},
-"hyphens" : {property: 'hyphens'},
-"image-rendering" : {property: 'image-rendering'},
-"inline-size" : {property: 'inline-size'},
-"inset-block" : {property: 'inset-block'},
-"inset-block-end" : {property: 'inset-block-end'},
-"inset-block-start" : {property: 'inset-block-start'},
-"inset-inline" : {property: 'inset-inline'},
-"inset-inline-end" : {property: 'inset-inline-end'},
-"inset-inline-start" : {property: 'inset-inline-start'},
-"margin-block" : {property: 'margin-block'},
-"margin-block-end" : {property: 'margin-block-end'},
-"margin-block-start" : {property: 'margin-block-start'},
-"margin-inline" : {property: 'margin-inline'},
-"margin-inline-end" : {property: 'margin-inline-end'},
-"margin-inline-start" : {property: 'margin-inline-start'},
-"mask-image" : {property: 'mask-image'},
-"mask-mode" : {property: 'mask-mode'},
-"mask-origin" : {property: 'mask-origin'},
-"mask-position" : {property: 'mask-position'},
-"mask-repeat" : {property: 'mask-repeat'},
-"mask-size" : {property: 'mask-size'},
-"max-block-size" : {property: 'max-block-size'},
-"max-inline-size" : {property: 'max-inline-size'},
-"min-block-size" : {property: 'min-block-size'},
-"min-inline-size" : {property: 'min-inline-size'},
-"offset" : {property: 'offset'},
-"offset-anchor" : {property: 'offset-anchor'},
-"offset-distance" : {property: 'offset-distance'},
-"offset-path" : {property: 'offset-path'},
-"offset-rotate" : {property: 'offset-rotate'},
-"orphans" : {property: 'orphans'},
-"overflow-anchor" : {property: 'overflow-anchor'},
-"overscroll-behavior-block" : {property: 'overscroll-behavior-block'},
-"overscroll-behavior-inline" : {property: 'overscroll-behavior-inline'},
-"padding-block" : {property: 'padding-block'},
-"padding-block-end" : {property: 'padding-block-end'},
-"padding-block-start" : {property: 'padding-block-start'},
-"padding-inline" : {property: 'padding-inline'},
-"padding-inline-end" : {property: 'padding-inline-end'},
-"padding-inline-start" : {property: 'padding-inline-start'},
-"page-break-after" : {property: 'page-break-after'},
-"page-break-before" : {property: 'page-break-before'},
-"page-break-inside" : {property: 'page-break-inside'},
-"paint-order" : {property: 'paint-order'},
-"perspective" : {property: 'perspective'},
-"perspective-origin" : {property: 'perspective-origin'},
-"quotes" : {property: 'quotes'},
-"scroll-snap-align" : {property: 'scroll-snap-align'},
-"scroll-snap-stop" : {property: 'scroll-snap-stop'},
-"scroll-snap-type" : {property: 'scroll-snap-type'},
-"scrollbar-color" : {property: 'scrollbar-color'},
-"tab-size" : {property: 'tab-size'},
-"text-align-last" : {property: 'text-align-last'},
-"text-emphasis" : {property: 'text-emphasis'},
-"text-emphasis-color" : {property: 'text-emphasis-color'},
-"text-emphasis-position" : {property: 'text-emphasis-position'},
-"text-emphasis-style" : {property: 'text-emphasis-style'},
-"text-justify" : {property: 'text-justify'},
-"text-orientation" : {property: 'text-orientation'},
-"text-shadow" : {property: 'text-shadow'},
-"text-underline-position" : {property: 'text-underline-position'},
-"unicode-bidi" : {property: 'unicode-bidi'},
-"widows" : {property: 'widows'},
-"word-spacing" : {property: 'word-spacing'},
-"word-wrap" : {property: 'word-wrap'},
-"writing-mode" : {property: 'writing-mode'},
 }
