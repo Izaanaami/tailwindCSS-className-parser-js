@@ -98,15 +98,6 @@ const Tailwind = (config?: Config) => {
       classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
-    // check properties with an arbitrary value
-    if(isArbitraryValue) {
-      console.log(arbitraryValue)
-      // convert underlines to whitespace ( if value is not a url )
-      const decodedArbitraryValue = decodeArbitraryValue(arbitraryValue);
-      const dataType = inferDataType(decodedArbitraryValue, ["color", "number", "percentage", "url", "length"])
-      return {dataType};
-    }
-    
     // check arbitrary properties
     else if(isArbitraryProperty) {
       const arbitraryPropertyWithoutBrackets = classNameWithoutModifiers.replace("[", "") + classNameWithoutModifiers.replace("]", "");
@@ -139,6 +130,18 @@ const Tailwind = (config?: Config) => {
         propertyName = 'ERROR';
         propertyValue = 'ERROR';
       } else {
+        // check properties with an arbitrary value
+        if(isArbitraryValue) {
+          console.log(arbitraryValue)
+          console.log(possiblePropertyNames)
+          // convert underlines to whitespace ( if value is not a url )
+          const decodedArbitraryValue = decodeArbitraryValue(arbitraryValue);
+          if(possiblePropertyNames.length > 1) {
+            const dataType = inferDataType(decodedArbitraryValue, ["color", "number", "percentage", "url", "length", "position", 'absolute-size', 'vector', 'angle', 'relative-size', 'generic-name', 'family-name', 'image', "bg-size", "line-width"])
+            return {dataType};
+          }
+          else return({possiblePropertyName: possiblePropertyNames[0]})
+        }
         // match value to find property
         const matchingPropertyName = possiblePropertyNames
           .sort((a, b) => properties[b].prefix.length - properties[a].prefix.length)

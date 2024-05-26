@@ -12,7 +12,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:parse": "jest parse.test.ts",
+    "test:classname": "jest classname.test.ts"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",

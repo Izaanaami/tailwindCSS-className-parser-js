@@ -217,8 +217,63 @@ test("bg-red-200/50", () => {
     isImportant: false,
   });
 });
-test("bg-[#342312]", () => {
+
+test("border", () => {
+  expect(parse("border")).toStrictEqual({
+    className: "border",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "border-width",
+    value: "1px",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});
+
+test("outline", () => {
+  expect(parse("outline")).toStrictEqual({
+    className: "outline",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "outline-style",
+    value: "solid",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});
+
+test.only("bg-[#342312]", () => {
   expect(parse("bg-[#342312]")).toStrictEqual({
     dataType: "color",
+  });
+});
+
+test.only("text-[20px]", () => {
+  expect(parse("text-[20px]")).toStrictEqual({
+    dataType: "length",
+  });
+});
+
+test.only("top-[10px]", () => {
+  expect(parse("top-[10px]")).toStrictEqual({
+    dataType: "length",
+  });
+});
+
+test.only("bg-[center]", () => {
+  expect(parse("bg-[center]")).toStrictEqual({
+    dataType: "position",
+  });
+});
+
+test.only("bg-[fixed]", () => {
+  expect(parse("bg-[fixed]")).toStrictEqual({
+    dataType: "position",
+  });
+});
+
+test.only("aspect-[3/10]", () => {
+  expect(parse("aspect-[3/10]")).toStrictEqual({
+    possiblePropertyName: "aspect-ratio",
   });
 });

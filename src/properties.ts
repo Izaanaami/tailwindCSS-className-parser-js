@@ -7,7 +7,8 @@ type Property = {
   scale: string,
   supportsNegativeValues?: boolean,
   composite?: boolean,
-  relatedProperties?: string[]
+  relatedProperties?: string[],
+  acceptedValueTypes? : string[], // it's for arbitrary values. only Properties that have a shared prefix would have this (except for box-shadow, because it has an unhandled value type)
 }
 
 type Properties = {
@@ -18,54 +19,55 @@ type Properties = {
 export const properties: Properties = {
 
   "aspect-ratio": { prefix: 'aspect', scale: 'aspectRatio' },
-  "accent-color": { scale: 'accentColor', prefix: 'accent' },
-  "align-self": { scale: 'alignSelf', prefix: 'self' },
+  "accent-color": { prefix: 'accent', scale: 'accentColor' },
+  "align-self": { prefix: 'self', scale: 'alignSelf' },
   "animation": { prefix: 'animate', scale: 'animation', composite: true, relatedProperties: ["animation-name", "animation-duration", "animation-timing-function", "animation-delay", "animation-iteration-count", "animation-direction", "animation-fill-mode", "animation-play-state"] },
   
-  "background-color": { prefix: 'bg', scale: 'colors' },
-  "background-image": { prefix: 'bg', scale: 'backgroundImage' },
+  "background-color": { prefix: 'bg', scale: 'colors', acceptedValueTypes: ["color"] },
+  "background-image": { prefix: 'bg', scale: 'backgroundImage', acceptedValueTypes: ["image"] },
   "background-opacity": { prefix: 'bg-opacity', scale: 'backgroundOpacity' },
-  "background-position": { prefix: 'bg', scale: 'backgroundPosition' },
-  "background-size": { prefix: 'bg', scale: 'backgroundSize' },
+  "background-position": { prefix: 'bg', scale: 'backgroundPosition', acceptedValueTypes: ["position"] },
+  "background-size": { prefix: 'bg', scale: 'backgroundSize', acceptedValueTypes: ["bg-size"] },
   
-  "border-color": { prefix: 'border', scale: 'colors', composite: true, relatedProperties: ["border-top-color", "border-right-color", "border-bottom-color", "border-left-color"] },
-  "border-top-color": { prefix: "border-t", scale: "colors" },
-  "border-right-color": { prefix: "border-r", scale: "colors" },
-  "border-bottom-color": { prefix: "border-b", scale: "colors" },
-  "border-left-color": { prefix: "border-l", scale: "colors" },
+  "border-color": { prefix: 'border', scale: 'colors', composite: true, acceptedValueTypes: ["color"] , relatedProperties: ["border-top-color", "border-right-color", "border-bottom-color", "border-left-color"] },
+  "border-top-color": { prefix: "border-t", scale: "colors", acceptedValueTypes: ["color"] },
+  "border-right-color": { prefix: "border-r", scale: "colors", acceptedValueTypes: ["color"] },
+  "border-bottom-color": { prefix: "border-b", scale: "colors", acceptedValueTypes: ["color"] },
+  "border-left-color": { prefix: "border-l", scale: "colors", acceptedValueTypes: ["color"] },
 
   "border-opacity": { prefix: 'border-opacity', scale: 'borderOpacity' },
 
   "border-style": { prefix: 'border', scale: 'borderStyle' },
 
-  "border-width": { prefix: 'border', scale: 'borderWidth' },
-  "border-top-width": { prefix: 'border-t', scale: 'borderWidth' },
-  "border-right-width": { prefix: 'border-r', scale: 'borderWidth' },
-  "border-bottom-width": { prefix: 'border-b', scale: 'borderWidth' },
-  "border-left-width": { prefix: 'border-l', scale: 'borderWidth' },
+  "border-width": { prefix: 'border', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
+  "border-top-width": { prefix: 'border-t', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
+  "border-right-width": { prefix: 'border-r', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
+  "border-bottom-width": { prefix: 'border-b', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
+  "border-left-width": { prefix: 'border-l', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
 
-  "border-radius": { prefix: 'rounded', scale: 'borderRadius', composite: true, relatedProperties: ["border-top-left-radius", "border-top-right-radius", "border-bottom-right-radius", "border-bottom-left-radius"]},
-  "border-radius-top-left": { prefix: 'rounded-tl', scale: 'borderRadius' },
-  "border-radius-top-right": { prefix: 'rounded-tr', scale: 'borderRadius' },
-  "border-radius-bottom-right": { prefix: 'rounded-br', scale: 'borderRadius' },
-  "border-radius-bottom-left": { prefix: 'rounded-bl', scale: 'borderRadius' },
-  "border-radius-top": {prefix: 'rounded-t', scale: 'borderRadius', composite: true, relatedProperties: ["border-top-left-radius", "border-top-right-radius"]},
-  "border-radius-right": {prefix: 'rounded-r', scale: 'borderRadius', composite: true, relatedProperties: ["border-top-right-radius", "border-bottom-right-radius"]},
-  "border-radius-bottom": {prefix: 'rounded-b', scale: 'borderRadius', composite: true, relatedProperties: ["border-bottom-right-radius", "border-bottom-left-radius"]},
-  "border-radius-left": {prefix: 'rounded-l', scale: 'borderRadius', composite: true, relatedProperties: ["border-bottom-left-radius", "border-top-left-radius"]},
-  "border-radius-startStart-endStart": {prefix: 'rounded-s', scale: 'borderRadius', composite: true, relatedProperties: ["border-start-start-radius", "border-end-start-radius"]},
-  "border-radius-startEnd-endEnd": {prefix: 'rounded-e', scale: 'borderRadius', composite: true, relatedProperties: ["border-start-end-radius", "border-end-end-radius"]},
-  "border-radius-start-start": {prefix: 'rounded-ss', scale: 'borderRadius'},
-  "border-radius-start-end": {prefix: 'rounded-se', scale: 'borderRadius'},
-  "border-radius-end-end": {prefix: 'rounded-ee', scale: 'borderRadius'},
-  "border-radius-end-start": {prefix: 'rounded-es', scale: 'borderRadius'},
+  "border-radius": { prefix: 'rounded', scale: 'borderRadius',  composite: true, relatedProperties: ["border-top-left-radius", "border-top-right-radius", "border-bottom-right-radius", "border-bottom-left-radius"]},
+  "border-radius-top-left": { prefix: 'rounded-tl', scale: 'borderRadius', },
+  "border-radius-top-right": { prefix: 'rounded-tr', scale: 'borderRadius', },
+  "border-radius-bottom-right": { prefix: 'rounded-br', scale: 'borderRadius', },
+  "border-radius-bottom-left": { prefix: 'rounded-bl', scale: 'borderRadius', },
+  "border-radius-top": {prefix: 'rounded-t', scale: 'borderRadius',  composite: true, relatedProperties: ["border-top-left-radius", "border-top-right-radius"]},
+  "border-radius-right": {prefix: 'rounded-r', scale: 'borderRadius',  composite: true, relatedProperties: ["border-top-right-radius", "border-bottom-right-radius"]},
+  "border-radius-bottom": {prefix: 'rounded-b', scale: 'borderRadius',  composite: true, relatedProperties: ["border-bottom-right-radius", "border-bottom-left-radius"]},
+  "border-radius-left": {prefix: 'rounded-l', scale: 'borderRadius',  composite: true, relatedProperties: ["border-bottom-left-radius", "border-top-left-radius"]},
+  "border-radius-startStart-endStart": {prefix: 'rounded-s', scale: 'borderRadius',  composite: true, relatedProperties: ["border-start-start-radius", "border-end-start-radius"]},
+  "border-radius-startEnd-endEnd": {prefix: 'rounded-e', scale: 'borderRadius',  composite: true, relatedProperties: ["border-start-end-radius", "border-end-end-radius"]},
+  "border-radius-start-start": {prefix: 'rounded-ss', scale: 'borderRadius', },
+  "border-radius-start-end": {prefix: 'rounded-se', scale: 'borderRadius', },
+  "border-radius-end-end": {prefix: 'rounded-ee', scale: 'borderRadius', },
+  "border-radius-end-start": {prefix: 'rounded-es', scale: 'borderRadius', },
 
   "border-spacing": { prefix: 'border-spacing', scale: 'borderSpacing', composite: true, relatedProperties: ["border-spacing-x", "border-spacing-y"] },
   "border-spacing-x": { prefix: 'border-spacing-x', scale: 'borderSpacing' },
   "border-spacing-y": { prefix: 'border-spacing-y', scale: 'borderSpacing' },
 
+  // box-shadow does not get an acceptedValueTypes property because it gets an special value ( we handle it in index file )
   "box-shadow": { prefix: 'shadow', scale: 'boxShadow' },
-  "box-shadow-color": { prefix: 'shadow', scale: 'colors' },
+  "box-shadow-color": { prefix: 'shadow', scale: 'colors', acceptedValueTypes: ["color"] },
 
   "columns": { prefix: 'columns', scale: 'columns', composite: true, relatedProperties: ["column-width", "column-count"] },
   "cursor": { prefix: 'cursor', scale: 'cursor' },
@@ -104,9 +106,9 @@ export const properties: Properties = {
   "flex-shrink": { prefix: 'flex-shrink', scale: 'flexShrink' },
 
   "flex-basis": { prefix: 'basis', scale: 'flexBasis' },
-  "font-weight": { prefix: 'font', scale: 'fontWeight' },
-  "font-family": { prefix: 'font', scale: 'fontFamily' },
-  "font-size": { prefix: 'text', scale: 'fontSize' },
+  "font-weight": { prefix: 'font', scale: 'fontWeight', acceptedValueTypes: ["number"] },
+  "font-family": { prefix: 'font', scale: 'fontFamily', acceptedValueTypes: ["generic-name", "family-name"] },
+  "font-size": { prefix: 'text', scale: 'fontSize', acceptedValueTypes: ["length", "percentage"] },
 
   "gap": { prefix: 'gap', scale: 'gap', composite: true, relatedProperties: ["row-gap", "column-gap"] },
   "row-gap": { prefix: 'gap-x', scale: 'gap' },
@@ -167,14 +169,13 @@ export const properties: Properties = {
     supportsNegativeValues: false // set explicitly because it contains non-number values
   },
 
-  "outline": { prefix: 'outline', scale: 'outline' },
-  "outline-color": { prefix: 'outline', scale: 'colors' },
+  "outline-color": { prefix: 'outline', scale: 'colors', acceptedValueTypes: ["color"] },
   "outline-offset": {
     prefix: 'outline-offset',
     scale: 'outlineOffset',
-    supportsNegativeValues: true
+    supportsNegativeValues: true,
   },
-  "outline-width": { prefix: 'outline', scale: 'outlineWidth' },
+  "outline-width": { prefix: 'outline', scale: 'outlineWidth', acceptedValueTypes: ["length", "percentage", "line-width"]},
 
   "padding": { prefix: 'p', scale: 'padding', composite: true, relatedProperties: ["padding-top", "padding-right", "padding-bottom", "padding-left"] },
   "padding-top": { prefix: 'pt', scale: 'padding' },
@@ -187,16 +188,16 @@ export const properties: Properties = {
   "placeholder-color": { prefix: 'placeholder', scale: 'colors' },
   "placeholder-opacity": { prefix: 'placeholder-opacity', scale: 'placeholderOpacity' },
 
-  "ring-color": { prefix: 'ring', scale: 'colors' },
-  "ring-offset-color": { prefix: 'ring-offset', scale: 'colors' },
-  "ring-offset-width": { prefix: 'ring-offset', scale: 'ringOffsetWidth' },
+  "ring-color": { prefix: 'ring', scale: 'colors', acceptedValueTypes: ["color"] },
+  "ring-offset-color": { prefix: 'ring-offset', scale: 'colors', acceptedValueTypes: ["color"] },
+  "ring-offset-width": { prefix: 'ring-offset', scale: 'ringOffsetWidth', acceptedValueTypes: ["length", "percentage"] },
   "ring-opacity": { prefix: 'ring-opacity', scale: 'ringOpacity' },
-  "ring-width": { prefix: 'ring', scale: 'ringWidth' },
+  "ring-width": { prefix: 'ring', scale: 'ringWidth', acceptedValueTypes: ["length", "percentage"] },
 
   "rotate": { prefix: 'rotate', scale: 'rotate' },
 
-  "stroke": { prefix: 'stroke', scale: 'colors' },
-  "stroke-width": { prefix: 'stroke', scale: 'strokeWidth' },
+  "stroke": { prefix: 'stroke', scale: 'colors', acceptedValueTypes: ["color"] },
+  "stroke-width": { prefix: 'stroke', scale: 'strokeWidth', acceptedValueTypes: ["length", "percentage"] },
 
   "scale": { prefix: 'scale', scale: 'scale' },
 
@@ -224,9 +225,9 @@ export const properties: Properties = {
   "space-x": { prefix: 'space-x', scale: 'space' },
   "space-y": { prefix: 'space-y', scale: 'space' },
 
-  "color": { prefix: 'text', scale: 'colors' },
-  "text-decoration-color": { prefix: 'decoration', scale: 'textDecorationColor' },
-  "text-decoration-thickness": { prefix: 'decoration', scale: 'textDecorationThickness' },
+  "color": { prefix: 'text', scale: 'colors', acceptedValueTypes: ["color"] },
+  "text-decoration-color": { prefix: 'decoration', scale: 'textDecorationColor', acceptedValueTypes: ["color"] },
+  "text-decoration-thickness": { prefix: 'decoration', scale: 'textDecorationThickness', acceptedValueTypes: ["length", "percentage", "line-width"] },
   "text-indent": {
     prefix: 'indent',
     scale: 'textIndent',
