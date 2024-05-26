@@ -1,261 +1,266 @@
-import { describe, test, assert } from 'vitest';
-
 import Tailwind from '../src/index';
 const config = require('./tailwind.config');
 const { classname } = Tailwind(config);
 
-describe('classname', () => {
-  test('m-4', async () => {
-    assert.deepEqual(
-      { className: 'm-4' },
+  test('m-4', () => {
+    expect(
       classname({
         property: 'margin',
         value: '1rem'
-      })
+      })).toStrictEqual(
+      {className: 'm-4'}
+      
     );
   });
 
   test('md:w-48', () => {
-    assert.deepEqual(
-      { className: 'md:w-48' },
+    expect(
       classname({
         responsiveModifier: 'md',
         property: 'width',
         value: '12rem'
-      })
+      })).toStrictEqual(
+      { className: 'md:w-48' }
+      
     );
   });
 
   test('text-sm', () => {
-    assert.deepEqual(
-      { className: 'text-sm' },
+    expect(
       classname({
-        property: 'fontSize',
+        property: 'font-size',
         value: '0.875rem'
-      })
+      })).toStrictEqual(
+      { className: 'text-sm' }
+      
     );
   });
 
   test('md:hover:text-blue-600', () => {
-    assert.deepEqual(
-      { className: 'md:hover:text-blue-600' },
-      classname({
-        responsiveModifier: 'md',
-        pseudoModifier: 'hover',
-        property: 'textColor',
-        value: '#2563eb'
-      })
-    );
-  });
-
-  test('color instead of textColor', () => {
-    assert.deepEqual(
-      { error: { property: 'UNIDENTIFIED_PROPERTY, did you mean textColor?' } },
+    expect(
       classname({
         responsiveModifier: 'md',
         pseudoModifier: 'hover',
         property: 'color',
         value: '#2563eb'
-      })
+      })).toStrictEqual(
+      { className: 'md:hover:text-blue-600' }
+      
     );
   });
 
   test('hover:bg-green-100', () => {
-    assert.deepEqual(
-      { className: 'hover:bg-green-100' },
+    expect(
       classname({
         pseudoModifier: 'hover',
-        property: 'backgroundColor',
+        property: 'background-color',
         value: '#dcfce7'
-      })
+      })).toStrictEqual(
+      { className: 'hover:bg-green-100' }
+      
     );
   });
 
   test('absolute', () => {
-    assert.deepEqual(
-      { className: 'absolute' },
+    expect(
       classname({
         property: 'position',
         value: 'absolute'
-      })
+      })).toStrictEqual(
+      { className: 'absolute' }
+      
     );
   });
 
   test('font-serif', () => {
-    assert.deepEqual(
-      { className: 'font-serif' },
+    expect(
       classname({
-        property: 'fontFamily',
+        property: 'font-family',
         value: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif'
-      })
+      })).toStrictEqual(
+      { className: 'font-serif' }
+      
     );
   });
 
   test('drop-shadow-md', () => {
-    assert.deepEqual(
-      { className: 'drop-shadow-md' },
+    expect(
       classname({
-        property: 'dropShadow',
+        property: 'drop-shadow',
         value: '0 4px 3px rgb(0 0 0 / 0.07), 0 2px 2px rgb(0 0 0 / 0.06)'
-      })
+      })).toStrictEqual(
+      { className: 'drop-shadow-md' }
+      
     );
   });
 
   test('-m-64', () => {
-    assert.deepEqual(
-      { className: '-m-64' },
+    expect(
       classname({
         property: 'margin',
         value: '-16rem'
-      })
+      })).toStrictEqual(
+      { className: '-m-64' }
+      
     );
   });
 
   test('block', () => {
-    assert.deepEqual(
-      { className: 'block' },
+    expect(
       classname({
         property: 'display',
         value: 'block'
-      })
+      })).toStrictEqual(
+      { className: 'block' }
+      
     );
   });
 
   test('tracking-tighter', () => {
-    assert.deepEqual(
-      { className: 'tracking-tighter' },
+    expect(
       classname({
-        property: 'letterSpacing',
+        property: 'letter-spacing',
         value: '-0.05em'
-      })
+      })).toStrictEqual(
+      { className: 'tracking-tighter' }
+      
     );
   });
 
-  test.todo('composite class', () => {
-    assert.deepEqual(
-      { className: 'sr-only' },
-      classname({
-        property: 'composite',
-        value: null,
-        relatedProperties: {
-          position: 'static',
-          width: 'auto',
-          height: 'auto',
-          padding: '0',
-          margin: '0',
-          overflow: 'visible',
-          clip: 'auto',
-          whiteSpace: 'normal'
-        }
-      })
-    );
-  });
+  // test('composite class', () => {
+  //   expect(
+  //     classname({
+  //       property: 'composite',
+  //       value: null,
+  //       relatedProperties: {
+  //         position: 'static',
+  //         width: 'auto',
+  //         height: 'auto',
+  //         padding: '0',
+  //         margin: '0',
+  //         overflow: 'visible',
+  //         clip: 'auto',
+  //         whiteSpace: 'normal'
+  //       }
+  //     })).toStrictEqual(
+  //     { className: 'sr-only' }
+      
+  //   );
+  // });
 
   test('bg-red-200/50', () => {
-    assert.deepEqual(
-      { className: 'bg-red-200/50' },
+    expect(
       classname({
-        property: 'backgroundColor',
+        property: 'background-color',
         value: '#fecaca80'
-      })
+      })).toStrictEqual(
+      { className: 'bg-red-200/50' }
+      
     );
   });
 
   test('bg-red-200/50 uppercase', () => {
-    assert.deepEqual(
-      { className: 'bg-red-200/50' },
+    expect(
       classname({
-        property: 'backgroundColor',
+        property: 'background-color',
         value: '#FECACA80'
-      })
+      })).toStrictEqual(
+      { className: 'bg-red-200/50' }
+      
     );
   });
 
   test('unsupported color format', () => {
-    assert.deepEqual(
-      { error: { value: 'Only hex values are supported, example: #fecaca80' } },
+    expect(
       classname({
-        property: 'backgroundColor',
+        property: 'background-color',
         value: 'rgb(255,255,255)'
-      })
+      })).toStrictEqual(
+      { error: { value: 'Only hex values are supported, example: #fecaca80' } }
+      
     );
   });
 
   // todo: unhandled color shorthand/longhand
-  test.todo('bg-black/50 shortform', () => {
-    assert.deepEqual(
-      { className: 'bg-black/50' },
+  test('bg-black/50 shortform', () => {
+    expect(
       classname({
-        property: 'backgroundColor',
+        property: 'background-color',
         value: '#0008'
-      })
+      })).toStrictEqual(
+      { className: 'bg-black/50' }
+      
     );
   });
 
   // todo: black is stored as #000 in theme instead of full value :/
-  test.todo('bg-black', () => {
-    assert.deepEqual(
-      { className: 'bg-black' },
+  test('bg-black', () => {
+    expect(
       classname({
-        property: 'backgroundColor',
+        property: 'background-color',
         value: '#000000'
-      })
+      })).toStrictEqual(
+      { className: 'bg-black' }
+      
     );
   });
 
   // incorrect input
   test('incorrect responsive modifier', () => {
-    assert.deepEqual(
+    expect(
+      classname({
+        responsiveModifier: 'small',
+        property: 'background-color',
+        value: '#dcfce7'
+      })).toStrictEqual(
       {
         error: {
           responsiveModifier: 'Unidentified responsive modifier, expected one of [sm, md, lg, xl, 2xl], got small'
         }
       },
-      classname({
-        responsiveModifier: 'small',
-        property: 'backgroundColor',
-        value: '#dcfce7'
-      })
+      
     );
   });
 
   test('incorrect pseudo modifier', () => {
-    assert.deepEqual(
+    expect(
+      classname({
+        pseudoModifier: 'hovers',
+        property: 'background-color',
+        value: '#dcfce7'
+      })).toStrictEqual(
       {
         error: {
           pseudoModifier:
             'Unidentified pseudo modifier, expected one of [first, last, odd, even, visited, checked, empty, read-only, group-hover, group-focus, focus-within, hover, focus, focus-visible, active, disabled], got hovers'
         }
       },
-      classname({
-        pseudoModifier: 'hovers',
-        property: 'backgroundColor',
-        value: '#dcfce7'
-      })
+      
     );
   });
 
   test('incorrect property', () => {
-    assert.deepEqual(
-      { error: { property: 'UNIDENTIFIED_PROPERTY' } },
+    expect(
       classname({
         responsiveModifier: 'sm',
 
-        property: 'fontSizes',
+        property: 'font-sizes',
         value: '1.5rem'
-      })
+      })).toStrictEqual(
+      { error: { property: 'UNIDENTIFIED_PROPERTY' } },
+      
     );
   });
 
   test('incorrect value', () => {
-    assert.deepEqual(
-      { error: { value: 'UNIDENTIFIED_VALUE' } },
+    expect(
       classname({
         responsiveModifier: 'sm',
 
-        property: 'fontSize',
+        property: 'font-size',
         value: '1.5em' // should be rem
-      })
+      })).toStrictEqual(
+      { error: { value: 'UNIDENTIFIED_VALUE' } },
+      
     );
   });
-});

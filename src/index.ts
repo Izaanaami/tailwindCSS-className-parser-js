@@ -2,6 +2,9 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import type { Config } from 'tailwindcss/types/config';
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 import { properties, namedClassProperties } from './properties';
+import { decodeArbitraryValue } from "./utils/decode-arbitrary-value";
+import { inferDataType } from "./utils/infer-data-type";
+const config = require("../tests/tailwind.config")
 
 const Tailwind = (config?: Config) => {
   // @ts-ignore resolveConfig doesn't like empty config but stubs it anyways
@@ -62,7 +65,7 @@ const Tailwind = (config?: Config) => {
       const endIndex = className.indexOf("]");
       let arbitraryPart = className.slice(startIndex, endIndex + 1);
       if(isArbitraryProperty) arbitraryProperty = arbitraryPart;
-      else arbitraryValue = arbitraryPart;
+      else arbitraryValue = arbitraryPart.slice(1,-1);
     }
     
     let numberOfModifiers: number;
@@ -95,10 +98,20 @@ const Tailwind = (config?: Config) => {
       classNameWithoutModifiers = classNameWithoutModifiers.replace('-', '');
     }
 
+    // check properties with an arbitrary value
+    if(isArbitraryValue) {
+      console.log(arbitraryValue)
+      // convert underlines to whitespace ( if value is not a url )
+      const decodedArbitraryValue = decodeArbitraryValue(arbitraryValue);
+      const dataType = inferDataType(decodedArbitraryValue, ["color", "number", "percentage", "url", "length"])
+      return {dataType};
+    }
+    
     // check arbitrary properties
-    if(isArbitraryProperty) {
+    else if(isArbitraryProperty) {
       const arbitraryPropertyWithoutBrackets = classNameWithoutModifiers.replace("[", "") + classNameWithoutModifiers.replace("]", "");
       propertyValue = arbitraryPropertyWithoutBrackets.split(":")[1];
+      return "hello there";
     }
     // check named classes
     else if (namedClassProperties[classNameWithoutModifiers]) {
@@ -111,7 +124,8 @@ const Tailwind = (config?: Config) => {
         propertyName = Object.keys(styles)[0];
         propertyValue = styles[propertyName];
       }
-    } else {
+    } 
+    else {
       const possiblePropertyNames = Object.keys(properties).filter((name) => {
         const property = properties[name];
         if (classNameWithoutModifiers === property.prefix) return true; // flex-grow-DEFAULT = flex-grow
@@ -167,7 +181,7 @@ const Tailwind = (config?: Config) => {
           const possibleValue = scale[scaleKey];
 
           // fontSize is special
-          if (propertyName === 'fontSize' && Array.isArray(possibleValue)) {
+          if (propertyName === 'font-size' && Array.isArray(possibleValue)) {
             propertyValue = possibleValue[0];
             relatedProperties = possibleValue[1];
           } else if (property.scale === 'colors') {
@@ -246,7 +260,7 @@ const Tailwind = (config?: Config) => {
       if (scale) {
         let scaleKey;
 
-        if (propertyName === 'fontSize') {
+        if (propertyName === 'font-size') {
           // format: sm: [ '0.875rem', { lineHeight: '1.25rem' } ],
           scaleKey = Object.keys(scale).find((key) => scale[key][0] === propertyValue);
         } else if (matchingProperty.scale === 'colors') {
@@ -309,8 +323,6 @@ const Tailwind = (config?: Config) => {
 
       if (namedClassPropertyIndex !== -1) {
         className = className + Object.keys(namedClassProperties)[namedClassPropertyIndex];
-      } else if (propertyName === 'color') {
-        error['property'] = 'UNIDENTIFIED_PROPERTY, did you mean textColor?';
       } else {
         error['property'] = 'UNIDENTIFIED_PROPERTY';
       }
