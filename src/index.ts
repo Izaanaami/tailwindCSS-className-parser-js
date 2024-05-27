@@ -185,7 +185,7 @@ const Tailwind = (config?: Config) => {
               if (propertyName === undefined) propertyName = "ERROR";
             }
           } else propertyName = possiblePropertyNames[0];
-          propertyValue = arbitraryValue;
+          propertyValue = decodedArbitraryValue;
         } else {
           // match value to find property
           const matchingPropertyName = possiblePropertyNames

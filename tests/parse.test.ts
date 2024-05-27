@@ -363,9 +363,9 @@ test.only("shadow-[#003232]", () => {
   });
 });
 
-test.only("shadow-[10px 5px 0px 3px #444444]", () => {
-  expect(parse("shadow-[10px 5px 0px 3px #444444]")).toStrictEqual({
-    className: "shadow-[10px 5px 0px 3px #444444]",
+test.only("shadow-[10px_5px_0px_3px_#444444]", () => {
+  expect(parse("shadow-[10px_5px_0px_3px_#444444]")).toStrictEqual({
+    className: "shadow-[10px_5px_0px_3px_#444444]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "box-shadow",
