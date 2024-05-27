@@ -1,7 +1,7 @@
 import resolveConfig from "tailwindcss/resolveConfig";
 import type { Config } from "tailwindcss/types/config";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
-import { properties, namedClassProperties } from "./properties";
+import { properties, namedClassProperties, arbitraryProperties } from "./properties";
 import { decodeArbitraryValue } from "./utils/decode-arbitrary-value";
 import { inferDataType } from "./utils/infer-data-type";
 const config = require("../tests/tailwind.config");
@@ -38,7 +38,8 @@ const Tailwind = (config?: Config) => {
     let pseudoModifier: string | null = null;
     let propertyName: string;
     let propertyValue: string | null;
-    let relatedProperties: { [key: string]: string } = {};
+    let compositeProperties: { [key: string]: string } = {};
+    let relatedProperties : string[];
 
     let classNameWithoutModifiers: string = "";
 
@@ -109,7 +110,7 @@ const Tailwind = (config?: Config) => {
     }
 
     // check arbitrary properties
-    else if (isArbitraryProperty) {
+    if (isArbitraryProperty) {
       const arbitraryPropertyWithoutBrackets =
         classNameWithoutModifiers.replace("[", "") +
         classNameWithoutModifiers.replace("]", "");
@@ -122,7 +123,7 @@ const Tailwind = (config?: Config) => {
       if (Object.keys(styles).length > 1) {
         propertyName = "composite";
         propertyValue = null;
-        relatedProperties = styles;
+        compositeProperties = styles;
       } else {
         propertyName = Object.keys(styles)[0];
         propertyValue = styles[propertyName];
@@ -243,7 +244,7 @@ const Tailwind = (config?: Config) => {
             // fontSize is special
             if (propertyName === "font-size" && Array.isArray(possibleValue)) {
               propertyValue = possibleValue[0];
-              relatedProperties = possibleValue[1];
+              compositeProperties = possibleValue[1];
             } else if (property.scale === "colors") {
               const opacity = parseInt(classNameWithoutModifiers.split("/")[1]);
               propertyValue =
@@ -261,7 +262,13 @@ const Tailwind = (config?: Config) => {
           }
         }
       }
+      // populate related properties
+      if(propertyName !== "ERROR") {
+        if(isArbitraryProperty && arbitraryProperties[propertyName].relatedProperties) relatedProperties = arbitraryProperties[propertyName].relatedProperties;
+        else if(properties[propertyName].relatedProperties) relatedProperties = properties[propertyName].relatedProperties;
+      }
     }
+    if(relatedProperties === undefined) relatedProperties = [];
 
     return {
       className,
@@ -269,8 +276,9 @@ const Tailwind = (config?: Config) => {
       pseudoModifier,
       property: propertyName,
       value: isNegative ? "-" + propertyValue : propertyValue,
-      relatedProperties,
+      compositeProperties,
       isImportant,
+      relatedProperties
     };
   };
 

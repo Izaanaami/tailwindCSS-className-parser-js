@@ -132,7 +132,7 @@ const { classname } = Tailwind(config);
   //     classname({
   //       property: 'composite',
   //       value: null,
-  //       relatedProperties: {
+  //       compositeProperties: {
   //         position: 'static',
   //         width: 'auto',
   //         height: 'auto',

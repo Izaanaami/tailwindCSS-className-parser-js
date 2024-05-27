@@ -2,7 +2,7 @@
 // TODO: some of these values are not single properties like paddingX
 // TODO: some of these values are not simple classname selectors like divideX
 
-type Property = {
+export type Property = {
   prefix: string,
   scale: string,
   supportsNegativeValues?: boolean,
@@ -29,7 +29,7 @@ export const properties: Properties = {
   "background-position": { prefix: 'bg', scale: 'backgroundPosition', acceptedValueTypes: ["position"] },
   "background-size": { prefix: 'bg', scale: 'backgroundSize', acceptedValueTypes: ["bg-size"] },
   
-  "border-color": { prefix: 'border', scale: 'colors', composite: true, acceptedValueTypes: ["color"] , relatedProperties: ["border-top-color", "border-right-color", "border-bottom-color", "border-left-color"] },
+  "border-color": { prefix: 'border', scale: 'colors', composite: true, acceptedValueTypes: ["color"] , relatedProperties: ["border-top-color", "border-right-color", "border-bottom-color", "border-left-color"]},
   "border-top-color": { prefix: "border-t", scale: "colors", acceptedValueTypes: ["color"] },
   "border-right-color": { prefix: "border-r", scale: "colors", acceptedValueTypes: ["color"] },
   "border-bottom-color": { prefix: "border-b", scale: "colors", acceptedValueTypes: ["color"] },
@@ -39,7 +39,7 @@ export const properties: Properties = {
 
   "border-style": { prefix: 'border', scale: 'borderStyle' },
 
-  "border-width": { prefix: 'border', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
+  "border-width": { prefix: 'border', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"], relatedProperties: ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"]},
   "border-top-width": { prefix: 'border-t', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
   "border-right-width": { prefix: 'border-r', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
   "border-bottom-width": { prefix: 'border-b', scale: 'borderWidth', acceptedValueTypes: ["length", "percentage", "line-width"] },
@@ -668,7 +668,7 @@ export const arbitraryProperties : ArbitraryProperties = {
   "border-left": {property: "border-left", composite: true, relatedProperties: ["border-left-width", "border-left-style", "border-left-color"]},
   "border-right": {property: "border-right", composite: true, relatedProperties: ["border-right-width", "border-right-style", "border-right-color"]},
   "border-bottom": {property: "border-bottom", composite: true,relatedProperties: ["border-bottom-width", "border-bottom-style", "border-bottom-color"]},
-  "border-top": {property: "border-top", composite: true,relatedProperties: ["border-top-width", "border-top-style", "border-left-color"]},
+  "border-top": {property: "border-top", composite: true,relatedProperties: ["border-top-width", "border-top-style", "border-top-color"]},
 
   "border-block": { property: "border-block", composite: true, relatedProperties: ["border-block-width", "border-block-style", "border-block-color"]},
   "border-block-color": { property: "border-block-color", composite: true, relatedProperties: ["border-block-start-color", "border-block-end-color"]},

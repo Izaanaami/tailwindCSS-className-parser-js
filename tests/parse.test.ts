@@ -9,7 +9,8 @@ test("m-4", () => {
     pseudoModifier: null,
     property: "margin",
     value: "1rem",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: ["margin-top", "margin-right", "margin-bottom", "margin-left"],
     isImportant: false,
   });
 });
@@ -21,7 +22,8 @@ test("md:w-48", () => {
     pseudoModifier: null,
     property: "width",
     value: "12rem",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -33,7 +35,8 @@ test("text-sm", () => {
     pseudoModifier: null,
     property: "font-size",
     value: "0.875rem",
-    relatedProperties: { lineHeight: "1.25rem" },
+    compositeProperties: { lineHeight: "1.25rem" },
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -45,7 +48,8 @@ test("md:hover:text-blue-600", () => {
     pseudoModifier: "hover",
     property: "color",
     value: "#2563eb",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -57,7 +61,8 @@ test("hover:bg-green-100", () => {
     pseudoModifier: "hover",
     property: "background-color",
     value: "#dcfce7",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -69,7 +74,8 @@ test("absolute", () => {
     pseudoModifier: null,
     property: "position",
     value: "absolute",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -81,7 +87,8 @@ test("font-serif", () => {
     pseudoModifier: null,
     property: "font-family",
     value: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -93,7 +100,8 @@ test("flex", () => {
     pseudoModifier: null,
     property: "display",
     value: "flex",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -105,7 +113,8 @@ test("bg-red-200/50", () => {
     pseudoModifier: null,
     property: "background-color",
     value: "#fecaca80",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -117,7 +126,8 @@ test("right-2/4", () => {
     pseudoModifier: null,
     property: "right",
     value: "50%",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -130,7 +140,7 @@ test("sr-only", () => {
     pseudoModifier: null,
     property: "composite",
     value: null,
-    relatedProperties: {
+    compositeProperties: {
       position: "absolute",
       width: "1px",
       height: "1px",
@@ -141,6 +151,7 @@ test("sr-only", () => {
       "white-space": "nowrap",
       borderWidth: "0",
     },
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -152,7 +163,8 @@ test("block", () => {
     pseudoModifier: null,
     property: "display",
     value: "block",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -165,7 +177,8 @@ test("hovers:bg-green-100", () => {
     pseudoModifier: null,
     property: "background-color",
     value: "#dcfce7",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -177,7 +190,8 @@ test("bg-green-1000", () => {
     pseudoModifier: null,
     property: "ERROR",
     value: "ERROR",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -189,7 +203,8 @@ test("drop-shadow-md", () => {
     pseudoModifier: null,
     property: "drop-shadow",
     value: "0 4px 3px rgb(0 0 0 / 0.07), 0 2px 2px rgb(0 0 0 / 0.06)",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -201,7 +216,8 @@ test("sm:-m-64", () => {
     pseudoModifier: null,
     property: "margin",
     value: "-16rem",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: ["margin-top", "margin-right", "margin-bottom", "margin-left"],
     isImportant: false,
   });
 });
@@ -213,7 +229,8 @@ test("bg-red-200/50", () => {
     pseudoModifier: null,
     property: "background-color",
     value: "#fecaca80",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
@@ -225,7 +242,8 @@ test("border", () => {
     pseudoModifier: null,
     property: "border-width",
     value: "1px",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"],
     isImportant: false,
   });
 });
@@ -237,140 +255,152 @@ test("outline", () => {
     pseudoModifier: null,
     property: "outline-style",
     value: "solid",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
 // classNames with arbitrary values
-test.only("bg-[#342312]", () => {
+test("bg-[#342312]", () => {
   expect(parse("bg-[#342312]")).toStrictEqual({
     className: "bg-[#342312]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "background-color",
     value: "#342312",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("text-[20px]", () => {
+test("text-[20px]", () => {
   expect(parse("text-[20px]")).toStrictEqual({
     className: "text-[20px]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "font-size",
     value: "20px",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("top-[10px]", () => {
+test("top-[10px]", () => {
   expect(parse("top-[10px]")).toStrictEqual({
     className: "top-[10px]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "top",
     value: "10px",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("bg-[center]", () => {
+test("bg-[center]", () => {
   expect(parse("bg-[center]")).toStrictEqual({
     className: "bg-[center]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "background-position",
     value: "center",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("bg-[fixed]", () => {
+test("bg-[fixed]", () => {
   expect(parse("bg-[fixed]")).toStrictEqual({
     className: "bg-[fixed]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "ERROR",
     value: "fixed",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("aspect-[3/10]", () => {
+test("aspect-[3/10]", () => {
   expect(parse("aspect-[3/10]")).toStrictEqual({
     className: "aspect-[3/10]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "aspect-ratio",
     value: "3/10",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("!font-[900]", () => {
+test("!font-[900]", () => {
   expect(parse("!font-[900]")).toStrictEqual({
     className: "font-[900]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "font-weight",
     value: "900",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: true,
   });
 });
 
-test.only("hover:border-t-[rgb(29,32,135)]", () => {
+test("hover:border-t-[rgb(29,32,135)]", () => {
   expect(parse("hover:border-t-[rgb(29,32,135)]")).toStrictEqual({
     className: "hover:border-t-[rgb(29,32,135)]",
     responsiveModifier: null,
     pseudoModifier: "hover",
     property: "border-top-color",
     value: "rgb(29,32,135)",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("!lg:hover:px-[140rem]", () => {
+test("!lg:hover:px-[140rem]", () => {
   expect(parse("!lg:hover:px-[140rem]")).toStrictEqual({
     className: "lg:hover:px-[140rem]",
     responsiveModifier: "lg",
     pseudoModifier: "hover",
     property: "padding-x",
     value: "140rem",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: ["padding-right", "padding-left"],
     isImportant: true,
   });
 });
 
-test.only("shadow-[#003232]", () => {
+test("shadow-[#003232]", () => {
   expect(parse("shadow-[#003232]")).toStrictEqual({
     className: "shadow-[#003232]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "box-shadow-color",
     value: "#003232",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
 
-test.only("shadow-[10px_5px_0px_3px_#444444]", () => {
+test("shadow-[10px_5px_0px_3px_#444444]", () => {
   expect(parse("shadow-[10px_5px_0px_3px_#444444]")).toStrictEqual({
     className: "shadow-[10px_5px_0px_3px_#444444]",
     responsiveModifier: null,
     pseudoModifier: null,
     property: "box-shadow",
     value: "10px 5px 0px 3px #444444",
-    relatedProperties: {},
+    compositeProperties: {},
+    relatedProperties: [],
     isImportant: false,
   });
 });
