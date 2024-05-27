@@ -166,25 +166,62 @@ const Tailwind = (config?: Config) => {
               "bg-size",
               "line-width",
             ]);
-            return { dataType };
-          } else return { possiblePropertyName: possiblePropertyNames[0] };
-        }
-        // match value to find property
-        const matchingPropertyName = possiblePropertyNames
-          .sort(
-            (a, b) => properties[b].prefix.length - properties[a].prefix.length
-          )
-          .find((name) => {
-            const property = properties[name];
+            propertyName = possiblePropertyNames
+              .sort(
+                (a, b) =>
+                  properties[b].prefix.length - properties[a].prefix.length
+              )
+              .find((prop) =>
+                properties[prop].acceptedValueTypes.includes(dataType)
+              );
+            if (propertyName === undefined) propertyName = "ERROR";
+          } else propertyName = possiblePropertyNames[0];
+          propertyValue = arbitraryValue;
+        } else {
+          // match value to find property
+          const matchingPropertyName = possiblePropertyNames
+            .sort(
+              (a, b) =>
+                properties[b].prefix.length - properties[a].prefix.length
+            )
+            .find((name) => {
+              const property = properties[name];
 
-            // flatten color scales
+              // flatten color scales
+              const scale =
+                property.scale.includes("color") ||
+                property.scale.includes("Color")
+                  ? flattenColorPalette(theme[property.scale])
+                  : theme[property.scale];
+              if (!scale) return false; // couldn't find scale for property, probably unhandled
+
+              const scaleKey =
+                property.scale === "colors"
+                  ? // remove opacity modifier
+                    classNameWithoutModifiers
+                      .split("/")[0]
+                      .replace(property.prefix + "-", "")
+                  : classNameWithoutModifiers.replace(
+                      property.prefix + "-",
+                      ""
+                    );
+
+              if (scale.DEFAULT) scale[property.prefix] = scale.DEFAULT;
+
+              const possibleValue = scale[scaleKey];
+              // this could be null if it's not the right property
+              return Boolean(possibleValue);
+            });
+
+          if (matchingPropertyName) {
+            propertyName = matchingPropertyName;
+            const property = properties[matchingPropertyName];
+
             const scale =
               property.scale.includes("color") ||
               property.scale.includes("Color")
                 ? flattenColorPalette(theme[property.scale])
                 : theme[property.scale];
-            if (!scale) return false; // couldn't find scale for property, probably unhandled
-
             const scaleKey =
               property.scale === "colors"
                 ? // remove opacity modifier
@@ -192,49 +229,27 @@ const Tailwind = (config?: Config) => {
                     .split("/")[0]
                     .replace(property.prefix + "-", "")
                 : classNameWithoutModifiers.replace(property.prefix + "-", "");
-
-            if (scale.DEFAULT) scale[property.prefix] = scale.DEFAULT;
-
             const possibleValue = scale[scaleKey];
-            // this could be null if it's not the right property
-            return Boolean(possibleValue);
-          });
 
-        if (matchingPropertyName) {
-          propertyName = matchingPropertyName;
-          const property = properties[matchingPropertyName];
-
-          const scale =
-            property.scale.includes("color") || property.scale.includes("Color")
-              ? flattenColorPalette(theme[property.scale])
-              : theme[property.scale];
-          const scaleKey =
-            property.scale === "colors"
-              ? // remove opacity modifier
-                classNameWithoutModifiers
-                  .split("/")[0]
-                  .replace(property.prefix + "-", "")
-              : classNameWithoutModifiers.replace(property.prefix + "-", "");
-          const possibleValue = scale[scaleKey];
-
-          // fontSize is special
-          if (propertyName === "font-size" && Array.isArray(possibleValue)) {
-            propertyValue = possibleValue[0];
-            relatedProperties = possibleValue[1];
-          } else if (property.scale === "colors") {
-            const opacity = parseInt(classNameWithoutModifiers.split("/")[1]);
-            propertyValue =
-              possibleValue + (opacity ? percentToHex(opacity) : "");
-          } else if (Array.isArray(possibleValue)) {
-            // true for fontFamily and dropShadow
-            propertyValue = possibleValue.join(", ");
+            // fontSize is special
+            if (propertyName === "font-size" && Array.isArray(possibleValue)) {
+              propertyValue = possibleValue[0];
+              relatedProperties = possibleValue[1];
+            } else if (property.scale === "colors") {
+              const opacity = parseInt(classNameWithoutModifiers.split("/")[1]);
+              propertyValue =
+                possibleValue + (opacity ? percentToHex(opacity) : "");
+            } else if (Array.isArray(possibleValue)) {
+              // true for fontFamily and dropShadow
+              propertyValue = possibleValue.join(", ");
+            } else {
+              propertyValue = possibleValue;
+            }
           } else {
-            propertyValue = possibleValue;
+            // no clue what this is then
+            propertyName = "ERROR";
+            propertyValue = "ERROR";
           }
-        } else {
-          // no clue what this is then
-          propertyName = "ERROR";
-          propertyValue = "ERROR";
         }
       }
     }

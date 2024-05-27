@@ -242,38 +242,111 @@ test("outline", () => {
   });
 });
 
+// classNames with arbitrary values
 test.only("bg-[#342312]", () => {
   expect(parse("bg-[#342312]")).toStrictEqual({
-    dataType: "color",
+    className: "bg-[#342312]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "background-color",
+    value: "#342312",
+    relatedProperties: {},
+    isImportant: false,
   });
 });
 
 test.only("text-[20px]", () => {
   expect(parse("text-[20px]")).toStrictEqual({
-    dataType: "length",
+    className: "text-[20px]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "font-size",
+    value: "20px",
+    relatedProperties: {},
+    isImportant: false,
   });
 });
 
 test.only("top-[10px]", () => {
   expect(parse("top-[10px]")).toStrictEqual({
-    dataType: "length",
+    className: "top-[10px]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "top",
+    value: "10px",
+    relatedProperties: {},
+    isImportant: false,
   });
 });
 
 test.only("bg-[center]", () => {
   expect(parse("bg-[center]")).toStrictEqual({
-    dataType: "position",
+    className: "bg-[center]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "background-position",
+    value: "center",
+    relatedProperties: {},
+    isImportant: false,
   });
 });
 
 test.only("bg-[fixed]", () => {
   expect(parse("bg-[fixed]")).toStrictEqual({
-    dataType: "position",
+    className: "bg-[fixed]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "ERROR",
+    value: "fixed",
+    relatedProperties: {},
+    isImportant: false,
   });
 });
 
 test.only("aspect-[3/10]", () => {
   expect(parse("aspect-[3/10]")).toStrictEqual({
-    possiblePropertyName: "aspect-ratio",
+    className: "aspect-[3/10]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "aspect-ratio",
+    value: "3/10",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});
+
+test.only("!font-[900]", () => {
+  expect(parse("!font-[900]")).toStrictEqual({
+    className: "font-[900]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "font-weight",
+    value: "900",
+    relatedProperties: {},
+    isImportant: true,
+  });
+});
+
+test.only("hover:border-t-[rgb(29,32,135)]", () => {
+  expect(parse("hover:border-t-[rgb(29,32,135)]")).toStrictEqual({
+    className: "hover:border-t-[rgb(29,32,135)]",
+    responsiveModifier: null,
+    pseudoModifier: "hover",
+    property: "border-top-color",
+    value: "rgb(29,32,135)",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});
+
+test.only("!lg:hover:px-[140rem]", () => {
+  expect(parse("!lg:hover:px-[140rem]")).toStrictEqual({
+    className: "lg:hover:px-[140rem]",
+    responsiveModifier: "lg",
+    pseudoModifier: "hover",
+    property: "padding-x",
+    value: "140rem",
+    relatedProperties: {},
+    isImportant: true,
   });
 });
