@@ -66,7 +66,7 @@ export const properties: Properties = {
   "border-spacing-y": { prefix: 'border-spacing-y', scale: 'borderSpacing' },
 
   // box-shadow does not get an acceptedValueTypes property because it gets an special value ( we handle it in index file )
-  "box-shadow": { prefix: 'shadow', scale: 'boxShadow' },
+  "box-shadow": { prefix: 'shadow', scale: 'boxShadow', acceptedValueTypes: [] },
   "box-shadow-color": { prefix: 'shadow', scale: 'colors', acceptedValueTypes: ["color"] },
 
   "columns": { prefix: 'columns', scale: 'columns', composite: true, relatedProperties: ["column-width", "column-count"] },

@@ -350,3 +350,27 @@ test.only("!lg:hover:px-[140rem]", () => {
     isImportant: true,
   });
 });
+
+test.only("shadow-[#003232]", () => {
+  expect(parse("shadow-[#003232]")).toStrictEqual({
+    className: "shadow-[#003232]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "box-shadow-color",
+    value: "#003232",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});
+
+test.only("shadow-[10px 5px 0px 3px #444444]", () => {
+  expect(parse("shadow-[10px 5px 0px 3px #444444]")).toStrictEqual({
+    className: "shadow-[10px 5px 0px 3px #444444]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "box-shadow",
+    value: "10px 5px 0px 3px #444444",
+    relatedProperties: {},
+    isImportant: false,
+  });
+});

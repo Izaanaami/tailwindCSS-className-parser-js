@@ -166,15 +166,24 @@ const Tailwind = (config?: Config) => {
               "bg-size",
               "line-width",
             ]);
-            propertyName = possiblePropertyNames
-              .sort(
-                (a, b) =>
-                  properties[b].prefix.length - properties[a].prefix.length
-              )
-              .find((prop) =>
-                properties[prop].acceptedValueTypes.includes(dataType)
-              );
-            if (propertyName === undefined) propertyName = "ERROR";
+            // box-shadow is special and is handled separately
+            if (
+              possiblePropertyNames.includes("box-shadow") &&
+              dataType !== "color"
+            )
+              propertyName = "box-shadow";
+            // find the propertyName
+            else {
+              propertyName = possiblePropertyNames
+                .sort(
+                  (a, b) =>
+                    properties[b].prefix.length - properties[a].prefix.length
+                )
+                .find((prop) =>
+                  properties[prop].acceptedValueTypes.includes(dataType)
+                );
+              if (propertyName === undefined) propertyName = "ERROR";
+            }
           } else propertyName = possiblePropertyNames[0];
           propertyValue = arbitraryValue;
         } else {
