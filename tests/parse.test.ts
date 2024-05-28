@@ -12,6 +12,8 @@ test("m-4", () => {
     compositeProperties: {},
     relatedProperties: ["margin-top", "margin-right", "margin-bottom", "margin-left"],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -25,6 +27,8 @@ test("md:w-48", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -38,6 +42,8 @@ test("text-sm", () => {
     compositeProperties: { lineHeight: "1.25rem" },
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -51,6 +57,8 @@ test("md:hover:text-blue-600", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -64,6 +72,8 @@ test("hover:bg-green-100", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -77,6 +87,8 @@ test("absolute", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -90,6 +102,8 @@ test("font-serif", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -103,6 +117,8 @@ test("flex", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -116,6 +132,8 @@ test("bg-red-200/50", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -129,6 +147,8 @@ test("right-2/4", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -153,6 +173,8 @@ test("sr-only", () => {
     },
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -166,10 +188,11 @@ test("block", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
-// incorrect input
 test("hovers:bg-green-100", () => {
   expect(parse("hovers:bg-green-100")).toStrictEqual({
     className: "hovers:bg-green-100",
@@ -180,9 +203,12 @@ test("hovers:bg-green-100", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
+// incorrect input
 test("bg-green-1000", () => {
   expect(parse("bg-green-1000")).toStrictEqual({
     className: "bg-green-1000",
@@ -193,6 +219,8 @@ test("bg-green-1000", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -206,6 +234,8 @@ test("drop-shadow-md", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -219,6 +249,8 @@ test("sm:-m-64", () => {
     compositeProperties: {},
     relatedProperties: ["margin-top", "margin-right", "margin-bottom", "margin-left"],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -232,6 +264,8 @@ test("bg-red-200/50", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -245,6 +279,8 @@ test("border", () => {
     compositeProperties: {},
     relatedProperties: ["border-top-width", "border-right-width", "border-bottom-width", "border-left-width"],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -258,6 +294,8 @@ test("outline", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -272,6 +310,8 @@ test("bg-[#342312]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -285,6 +325,8 @@ test("text-[20px]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -298,6 +340,8 @@ test("top-[10px]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -311,6 +355,8 @@ test("bg-[center]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -324,6 +370,8 @@ test("bg-[fixed]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -337,6 +385,8 @@ test("aspect-[3/10]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -350,6 +400,8 @@ test("!font-[900]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: true,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -363,6 +415,8 @@ test("hover:border-t-[rgb(29,32,135)]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -376,6 +430,8 @@ test("!lg:hover:px-[140rem]", () => {
     compositeProperties: {},
     relatedProperties: ["padding-right", "padding-left"],
     isImportant: true,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -389,6 +445,8 @@ test("shadow-[#003232]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
   });
 });
 
@@ -402,5 +460,99 @@ test("shadow-[10px_5px_0px_3px_#444444]", () => {
     compositeProperties: {},
     relatedProperties: [],
     isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
+  });
+});
+
+// with arbitrary variants (modifiers)
+
+test("[&:nth-child(3)]:hover:bg-red-100", () => {
+  expect(parse("[&:nth-child(3)]:hover:bg-red-100")).toStrictEqual({
+    className: "[&:nth-child(3)]:hover:bg-red-100",
+    responsiveModifier: null,
+    pseudoModifier: "hover",
+    property: "background-color",
+    value: "#fee2e2",
+    compositeProperties: {},
+    relatedProperties: [],
+    isImportant: false,
+    arbitraryModifiers: ["&:nth-child(3)"],
+    atRules: [],
+  });
+});
+
+test("lg:[&_p]:[&:last-child]:mx-2", () => {
+  expect(parse("lg:[&_p]:[&:last-child]:mx-2")).toStrictEqual({
+    className: "lg:[&_p]:[&:last-child]:mx-2",
+    responsiveModifier: "lg",
+    pseudoModifier: null,
+    property: "margin-x",
+    value: "0.5rem",
+    compositeProperties: {},
+    relatedProperties: ["margin-right", "margin-left"],
+    isImportant: false,
+    arbitraryModifiers: ["&_p", "&:last-child"],
+    atRules: [],
+  });
+});
+
+test("![@media(max-width:800px)]:[&:last-child]:hover:mx-2", () => {
+  expect(parse("![@media(max-width:800px)]:[&:last-child]:hover:mx-2")).toStrictEqual({
+    className: "[@media(max-width:800px)]:[&:last-child]:hover:mx-2",
+    responsiveModifier: null,
+    pseudoModifier: "hover",
+    property: "margin-x",
+    value: "0.5rem",
+    compositeProperties: {},
+    relatedProperties: ["margin-right", "margin-left"],
+    isImportant: true,
+    arbitraryModifiers: ["&:last-child"],
+    atRules: [
+      {
+        atRule: "@media(max-width:800px)",
+        modifiers: [],
+      }
+    ],
+  });
+});
+
+test("[@media(min-width:300px){&:hover}]:-p-2", () => {
+  expect(parse("[@media(min-width:300px){&:hover}]:-p-2")).toStrictEqual({
+    className: "[@media(min-width:300px){&:hover}]:-p-2",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "padding",
+    value: "-0.5rem",
+    compositeProperties: {},
+    relatedProperties: ["padding-top", "padding-right", "padding-bottom", "padding-left"],
+    isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [
+      {
+        atRule: "@media(min-width:300px)",
+        modifiers: ["&:hover"]
+      }
+    ],
+  });
+});
+
+test("!sm:active:[@media(min-width:300px){&:hover}]:[&:first-child]:bg-[#392939]", () => {
+  expect(parse("!sm:active:[@media(min-width:300px){&:hover}]:[&:first-child]:bg-[#392939]")).toStrictEqual({
+    className: "sm:active:[@media(min-width:300px){&:hover}]:[&:first-child]:bg-[#392939]",
+    responsiveModifier: "sm",
+    pseudoModifier: "active",
+    property: "background-color",
+    value: "#392939",
+    compositeProperties: {},
+    relatedProperties: [],
+    isImportant: true,
+    arbitraryModifiers: ["&:first-child"],
+    atRules: [
+      {
+        atRule: "@media(min-width:300px)",
+        modifiers: ["&:hover"]
+      }
+    ],
   });
 });

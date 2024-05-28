@@ -1,5 +1,3 @@
-// TODO: standardise camelcase
-// TODO: some of these values are not single properties like paddingX
 // TODO: some of these values are not simple classname selectors like divideX
 
 export type Property = {

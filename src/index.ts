@@ -36,12 +36,18 @@ const Tailwind = (config?: Config) => {
     // format: prefix-value | responsive:prefix-value | pseudo:prefix-value | responsive:pseudo:prefix-value
     let responsiveModifier: string | null = null;
     let pseudoModifier: string | null = null;
+    let arbitraryModifiers: string[] | null = [];
+    let atRules : {atRule: string, modifiers: string[]}[] | null = [];
     let propertyName: string;
     let propertyValue: string | null;
     let compositeProperties: { [key: string]: string } = {};
     let relatedProperties : string[];
-
+    let isArbitraryProperty = false;
+    let isArbitraryValue = false;
+    let arbitraryValue: string;
+    let arbitraryProperty: string;
     let classNameWithoutModifiers: string = "";
+    let classNameWithoutArbitraryModifiers : string = "";
 
     let isImportant = false;
     if (className.startsWith("!") || className.endsWith("!")) {
@@ -49,58 +55,101 @@ const Tailwind = (config?: Config) => {
       className = className.replace("!", "");
     }
 
-    // check the className for any arbitrary property or value before splitting the modifiers
-    // because arbitrary properties include ':' and we need to strip them away before splitting modifiers using ':'
-    let isArbitraryProperty = false;
-    let isArbitraryValue = false;
-    if (className.includes("[")) {
-      let index = className.indexOf("[") - 1;
-      if (index === -1 || className.charAt(index) !== "-") {
-        isArbitraryProperty = true;
-      } else {
-        isArbitraryValue = true;
+    // check for any arbitrary modifiers, atRules, property or value
+    classNameWithoutArbitraryModifiers = className;
+    while(classNameWithoutArbitraryModifiers.includes('[')){
+      let startIndex = classNameWithoutArbitraryModifiers.indexOf("[");
+      let endIndex = classNameWithoutArbitraryModifiers.indexOf(']');
+      let arbitraryPart = classNameWithoutArbitraryModifiers.slice(startIndex, endIndex + 1);
+
+      // TODO : write a better error handler
+      // closing bracket not found
+      if(endIndex === -1) {
+        return {
+          className,
+          responsiveModifier: "ERROR",
+          pseudoModifier: "ERROR",
+          property: "ERROR",
+          value: "ERROR",
+          compositeProperties: "ERROR",
+          isImportant: false,
+          isNegative: false,
+          relatedProperties: "ERROR",
+          arbitraryModifiers: "ERROR",
+          atRules: "ERROR"
+        } 
       }
-    }
-    // strip away the arbitrary value or property if there is any
-    let arbitraryValue: string;
-    let arbitraryProperty: string;
-    if (isArbitraryProperty || isArbitraryValue) {
-      const startIndex = className.indexOf("[");
-      const endIndex = className.indexOf("]");
-      let arbitraryPart = className.slice(startIndex, endIndex + 1);
-      if (isArbitraryProperty) arbitraryProperty = arbitraryPart;
-      else arbitraryValue = arbitraryPart.slice(1, -1);
+      // it is an arbitrary modifier
+      if(classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "&") {
+        arbitraryModifiers.push(arbitraryPart.slice(1, -1))
+        console.log(arbitraryPart)
+        classNameWithoutArbitraryModifiers = classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "");
+        console.log(classNameWithoutArbitraryModifiers)
+      }
+      // it is an arbitrary atRule
+      else if(classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "@") {
+        // check for any modifiers inside
+        let atRuleModifiers : string[] = [];
+        let atRule = arbitraryPart;
+        while(atRule.includes("{")) {
+          let atRuleModifierStartIndex = atRule.indexOf("{");
+          let atRuleModifierEndIndex = atRule.indexOf("}");
+          if(atRuleModifierEndIndex === -1) atRuleModifiers = []
+          else {
+            let atRuleModifier = atRule.slice(atRuleModifierStartIndex, atRuleModifierEndIndex + 1);
+            atRuleModifiers.push(atRuleModifier.slice(1, -1));
+            atRule = atRule.replace(atRuleModifier, "");
+          }
+        }
+        atRules.push({
+          atRule: atRule.slice(1, -1),
+          modifiers : atRuleModifiers
+        })
+        classNameWithoutArbitraryModifiers = classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "")
+      }
+      // it is an arbitrary property
+      else if(startIndex === 0 || classNameWithoutArbitraryModifiers.charAt(startIndex - 1) !== "-"){
+        isArbitraryProperty = true;
+        arbitraryProperty = arbitraryPart;
+        break;
+      }
+      // it is an arbitrary value
+      else {
+        isArbitraryValue = true;
+        arbitraryValue = arbitraryPart.slice(1, -1);
+        break;
+      }
     }
 
     let numberOfModifiers: number;
     if (isArbitraryProperty) {
-      let classNameWithoutArbitraryProperty = className.replace(
+      let classNameWithoutArbitraryProperty = classNameWithoutArbitraryModifiers.replace(
         arbitraryProperty,
         ""
       );
       numberOfModifiers = classNameWithoutArbitraryProperty.split(":").length;
     } else {
-      numberOfModifiers = className.split(":").length - 1;
+      numberOfModifiers = classNameWithoutArbitraryModifiers.split(":").length - 1;
     }
 
     if (numberOfModifiers === 0 && !isArbitraryProperty)
-      classNameWithoutModifiers = className;
+      classNameWithoutModifiers = classNameWithoutArbitraryModifiers;
     else if (numberOfModifiers === 0 && isArbitraryProperty)
       classNameWithoutModifiers = arbitraryProperty;
     else if (numberOfModifiers === 1) {
-      const unknownModifier = className.split(":")[0];
+      const unknownModifier = classNameWithoutArbitraryModifiers.split(":")[0];
       if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
-      else classNameWithoutModifiers = className.split(":")[1];
+      else classNameWithoutModifiers = classNameWithoutArbitraryModifiers.split(":")[1];
       if (responsiveModifiers.includes(unknownModifier))
         responsiveModifier = unknownModifier;
       else if (pseudoModifiers.includes(unknownModifier))
         pseudoModifier = unknownModifier;
       else; // have no idea what this is, TODO: should this ignore or throw an error?
     } else if (numberOfModifiers === 2) {
-      responsiveModifier = className.split(":")[0];
-      pseudoModifier = className.split(":")[1];
+      responsiveModifier = classNameWithoutArbitraryModifiers.split(":")[0];
+      pseudoModifier = classNameWithoutArbitraryModifiers.split(":")[1];
       if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
-      else classNameWithoutModifiers = className.split(":")[2];
+      else classNameWithoutModifiers = classNameWithoutArbitraryModifiers.split(":")[2];
     }
 
     let isNegative = false;
@@ -278,7 +327,9 @@ const Tailwind = (config?: Config) => {
       value: isNegative ? "-" + propertyValue : propertyValue,
       compositeProperties,
       isImportant,
-      relatedProperties
+      relatedProperties,
+      arbitraryModifiers,
+      atRules
     };
   };
 
