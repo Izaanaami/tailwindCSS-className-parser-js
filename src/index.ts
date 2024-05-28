@@ -1,7 +1,11 @@
 import resolveConfig from "tailwindcss/resolveConfig";
 import type { Config } from "tailwindcss/types/config";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
-import { properties, namedClassProperties, arbitraryProperties } from "./properties";
+import {
+  properties,
+  namedClassProperties,
+  arbitraryProperties,
+} from "./properties";
 import { decodeArbitraryValue } from "./utils/decode-arbitrary-value";
 import { inferDataType } from "./utils/infer-data-type";
 const config = require("../tests/tailwind.config");
@@ -37,17 +41,17 @@ const Tailwind = (config?: Config) => {
     let responsiveModifier: string | null = null;
     let pseudoModifier: string | null = null;
     let arbitraryModifiers: string[] | null = [];
-    let atRules : {atRule: string, modifiers: string[]}[] | null = [];
+    let atRules: { atRule: string; modifiers: string[] }[] | null = [];
     let propertyName: string;
     let propertyValue: string | null;
     let compositeProperties: { [key: string]: string } = {};
-    let relatedProperties : string[];
+    let relatedProperties: string[];
     let isArbitraryProperty = false;
     let isArbitraryValue = false;
     let arbitraryValue: string;
     let arbitraryProperty: string;
     let classNameWithoutModifiers: string = "";
-    let classNameWithoutArbitraryModifiers : string = "";
+    let classNameWithoutArbitraryModifiers: string = "";
 
     let isImportant = false;
     if (className.startsWith("!") || className.endsWith("!")) {
@@ -57,14 +61,17 @@ const Tailwind = (config?: Config) => {
 
     // check for any arbitrary modifiers, atRules, property or value
     classNameWithoutArbitraryModifiers = className;
-    while(classNameWithoutArbitraryModifiers.includes('[')){
+    while (classNameWithoutArbitraryModifiers.includes("[")) {
       let startIndex = classNameWithoutArbitraryModifiers.indexOf("[");
-      let endIndex = classNameWithoutArbitraryModifiers.indexOf(']');
-      let arbitraryPart = classNameWithoutArbitraryModifiers.slice(startIndex, endIndex + 1);
+      let endIndex = classNameWithoutArbitraryModifiers.indexOf("]");
+      let arbitraryPart = classNameWithoutArbitraryModifiers.slice(
+        startIndex,
+        endIndex + 1
+      );
 
       // TODO : write a better error handler
       // closing bracket not found
-      if(endIndex === -1) {
+      if (endIndex === -1) {
         return {
           className,
           responsiveModifier: "ERROR",
@@ -76,39 +83,47 @@ const Tailwind = (config?: Config) => {
           isNegative: false,
           relatedProperties: "ERROR",
           arbitraryModifiers: "ERROR",
-          atRules: "ERROR"
-        } 
+          atRules: "ERROR",
+        };
       }
       // it is an arbitrary modifier
-      if(classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "&") {
-        arbitraryModifiers.push(arbitraryPart.slice(1, -1))
-        console.log(arbitraryPart)
-        classNameWithoutArbitraryModifiers = classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "");
-        console.log(classNameWithoutArbitraryModifiers)
+      if (classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "&") {
+        arbitraryModifiers.push(decodeArbitraryValue(arbitraryPart.slice(1, -1)));
+        classNameWithoutArbitraryModifiers =
+          classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "");
       }
       // it is an arbitrary atRule
-      else if(classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "@") {
+      else if (
+        classNameWithoutArbitraryModifiers.charAt(startIndex + 1) === "@"
+      ) {
         // check for any modifiers inside
-        let atRuleModifiers : string[] = [];
+        let atRuleModifiers: string[] = [];
         let atRule = arbitraryPart;
-        while(atRule.includes("{")) {
+        while (atRule.includes("{")) {
           let atRuleModifierStartIndex = atRule.indexOf("{");
           let atRuleModifierEndIndex = atRule.indexOf("}");
-          if(atRuleModifierEndIndex === -1) atRuleModifiers = []
+          if (atRuleModifierEndIndex === -1) atRuleModifiers = [];
           else {
-            let atRuleModifier = atRule.slice(atRuleModifierStartIndex, atRuleModifierEndIndex + 1);
-            atRuleModifiers.push(atRuleModifier.slice(1, -1));
+            let atRuleModifier = atRule.slice(
+              atRuleModifierStartIndex,
+              atRuleModifierEndIndex + 1
+            );
+            atRuleModifiers.push(decodeArbitraryValue(atRuleModifier.slice(1, -1)));
             atRule = atRule.replace(atRuleModifier, "");
           }
         }
         atRules.push({
-          atRule: atRule.slice(1, -1),
-          modifiers : atRuleModifiers
-        })
-        classNameWithoutArbitraryModifiers = classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "")
+          atRule: decodeArbitraryValue(atRule.slice(1, -1)),
+          modifiers: atRuleModifiers,
+        });
+        classNameWithoutArbitraryModifiers =
+          classNameWithoutArbitraryModifiers.replace(arbitraryPart + ":", "");
       }
       // it is an arbitrary property
-      else if(startIndex === 0 || classNameWithoutArbitraryModifiers.charAt(startIndex - 1) !== "-"){
+      else if (
+        startIndex === 0 ||
+        classNameWithoutArbitraryModifiers.charAt(startIndex - 1) !== "-"
+      ) {
         isArbitraryProperty = true;
         arbitraryProperty = arbitraryPart;
         break;
@@ -123,13 +138,17 @@ const Tailwind = (config?: Config) => {
 
     let numberOfModifiers: number;
     if (isArbitraryProperty) {
-      let classNameWithoutArbitraryProperty = classNameWithoutArbitraryModifiers.replace(
-        arbitraryProperty,
-        ""
-      );
-      numberOfModifiers = classNameWithoutArbitraryProperty.split(":").length;
+      let classNameWithoutArbitraryProperty =
+      classNameWithoutArbitraryModifiers.replace(arbitraryProperty, "");
+      let splittedClassName = classNameWithoutArbitraryProperty.split(":");
+      // remove any remaining empty string
+      while (splittedClassName.includes("")) {
+        splittedClassName.splice(splittedClassName.indexOf(""), 1);
+      }
+      numberOfModifiers = splittedClassName.length;
     } else {
-      numberOfModifiers = classNameWithoutArbitraryModifiers.split(":").length - 1;
+      numberOfModifiers =
+        classNameWithoutArbitraryModifiers.split(":").length - 1;
     }
 
     if (numberOfModifiers === 0 && !isArbitraryProperty)
@@ -139,7 +158,9 @@ const Tailwind = (config?: Config) => {
     else if (numberOfModifiers === 1) {
       const unknownModifier = classNameWithoutArbitraryModifiers.split(":")[0];
       if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
-      else classNameWithoutModifiers = classNameWithoutArbitraryModifiers.split(":")[1];
+      else
+        classNameWithoutModifiers =
+          classNameWithoutArbitraryModifiers.split(":")[1];
       if (responsiveModifiers.includes(unknownModifier))
         responsiveModifier = unknownModifier;
       else if (pseudoModifiers.includes(unknownModifier))
@@ -149,7 +170,9 @@ const Tailwind = (config?: Config) => {
       responsiveModifier = classNameWithoutArbitraryModifiers.split(":")[0];
       pseudoModifier = classNameWithoutArbitraryModifiers.split(":")[1];
       if (isArbitraryProperty) classNameWithoutModifiers = arbitraryProperty;
-      else classNameWithoutModifiers = classNameWithoutArbitraryModifiers.split(":")[2];
+      else
+        classNameWithoutModifiers =
+          classNameWithoutArbitraryModifiers.split(":")[2];
     }
 
     let isNegative = false;
@@ -160,11 +183,19 @@ const Tailwind = (config?: Config) => {
 
     // check arbitrary properties
     if (isArbitraryProperty) {
-      const arbitraryPropertyWithoutBrackets =
-        classNameWithoutModifiers.replace("[", "") +
-        classNameWithoutModifiers.replace("]", "");
-      propertyValue = arbitraryPropertyWithoutBrackets.split(":")[1];
-      return "hello there";
+      let arbitraryPropertyWithoutBrackets =
+        classNameWithoutModifiers.replace("[", "")
+      arbitraryPropertyWithoutBrackets = arbitraryPropertyWithoutBrackets.replace("]", "")
+      let [name, value] = arbitraryPropertyWithoutBrackets.split(":");
+
+      // arbitrary values can not contain white-spaces in tailwind
+      if (value.includes(" ")) propertyValue = "ERROR";
+      else propertyValue = decodeArbitraryValue(value);
+
+      if (arbitraryProperties[name]) {
+        propertyName = arbitraryProperties[name].property;
+        relatedProperties = arbitraryProperties[name].relatedProperties || [];
+      }
     }
     // check named classes
     else if (namedClassProperties[classNameWithoutModifiers]) {
@@ -194,8 +225,6 @@ const Tailwind = (config?: Config) => {
       } else {
         // check properties with an arbitrary value
         if (isArbitraryValue) {
-          console.log(arbitraryValue);
-          console.log(possiblePropertyNames);
           // convert underlines to whitespace ( if value is not a url )
           const decodedArbitraryValue = decodeArbitraryValue(arbitraryValue);
           if (possiblePropertyNames.length > 1) {
@@ -235,7 +264,10 @@ const Tailwind = (config?: Config) => {
               if (propertyName === undefined) propertyName = "ERROR";
             }
           } else propertyName = possiblePropertyNames[0];
-          propertyValue = decodedArbitraryValue;
+          // arbitrary values can not contain white-spaces in tailwind
+          propertyValue = arbitraryValue.includes(" ")
+            ? "ERROR"
+            : decodedArbitraryValue;
         } else {
           // match value to find property
           const matchingPropertyName = possiblePropertyNames
@@ -312,12 +344,18 @@ const Tailwind = (config?: Config) => {
         }
       }
       // populate related properties
-      if(propertyName !== "ERROR") {
-        if(isArbitraryProperty && arbitraryProperties[propertyName].relatedProperties) relatedProperties = arbitraryProperties[propertyName].relatedProperties;
-        else if(properties[propertyName].relatedProperties) relatedProperties = properties[propertyName].relatedProperties;
+      if (propertyName !== "ERROR") {
+        if (
+          isArbitraryProperty &&
+          arbitraryProperties[propertyName].relatedProperties
+        )
+          relatedProperties =
+            arbitraryProperties[propertyName].relatedProperties;
+        else if (properties[propertyName].relatedProperties)
+          relatedProperties = properties[propertyName].relatedProperties;
       }
     }
-    if(relatedProperties === undefined) relatedProperties = [];
+    if (relatedProperties === undefined) relatedProperties = [];
 
     return {
       className,
@@ -329,7 +367,7 @@ const Tailwind = (config?: Config) => {
       isImportant,
       relatedProperties,
       arbitraryModifiers,
-      atRules
+      atRules,
     };
   };
 

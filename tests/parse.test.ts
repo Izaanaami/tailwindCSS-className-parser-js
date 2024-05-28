@@ -492,7 +492,7 @@ test("lg:[&_p]:[&:last-child]:mx-2", () => {
     compositeProperties: {},
     relatedProperties: ["margin-right", "margin-left"],
     isImportant: false,
-    arbitraryModifiers: ["&_p", "&:last-child"],
+    arbitraryModifiers: ["& p", "&:last-child"],
     atRules: [],
   });
 });
@@ -556,3 +556,102 @@ test("!sm:active:[@media(min-width:300px){&:hover}]:[&:first-child]:bg-[#392939]
     ],
   });
 });
+
+// arbitrary properties
+
+test("[max-width:200px]", () => {
+  expect(parse("[max-width:200px]")).toStrictEqual({
+    className: "[max-width:200px]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "max-width",
+    value: "200px",
+    compositeProperties: {},
+    relatedProperties: [],
+    isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
+  })
+})
+
+test("[grid-template:100px_auto_1fr_/_100%]", () => {
+  expect(parse("[grid-template:100px_auto_1fr_/_100%]")).toStrictEqual({
+    className: "[grid-template:100px_auto_1fr_/_100%]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "grid-template",
+    value: "100px auto 1fr / 100%",
+    compositeProperties: {},
+    relatedProperties: ["grid-template-columns", "grid-template-rows", "grid-template-areas"],
+    isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
+  })
+})
+
+// arbitrary value with white-spaces are not allowed
+test("[grid-template: 100px auto 1fr / 100%]", () => {
+  expect(parse("[grid-template: 100px auto 1fr / 100%]")).toStrictEqual({
+    className: "[grid-template: 100px auto 1fr / 100%]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "grid-template",
+    value: "ERROR",
+    compositeProperties: {},
+    relatedProperties: ["grid-template-columns", "grid-template-rows", "grid-template-areas"],
+    isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
+  })
+})
+
+test("lg:hover:[position:absolute]", () => {
+  expect(parse("lg:hover:[position:absolute]")).toStrictEqual({
+    className: "lg:hover:[position:absolute]",
+    responsiveModifier: "lg",
+    pseudoModifier: "hover",
+    property: "position",
+    value: "absolute",
+    compositeProperties: {},
+    relatedProperties: [],
+    isImportant: false,
+    arbitraryModifiers: [],
+    atRules: [],
+  })
+})
+
+test("sm:[@media(max-width:200px)]:[&:nth-child(2)]:hover:[padding:20px_10px]", () => {
+  expect(parse("sm:[@media(max-width:200px)]:[&:nth-child(2)]:hover:[padding:20px_10px]")).toStrictEqual({
+    className: "sm:[@media(max-width:200px)]:[&:nth-child(2)]:hover:[padding:20px_10px]",
+    responsiveModifier: "sm",
+    pseudoModifier: "hover",
+    property: "padding",
+    value: "20px 10px",
+    compositeProperties: {},
+    relatedProperties: ["padding-top", "padding-right", "padding-bottom", "padding-left"],
+    isImportant: false,
+    arbitraryModifiers: ["&:nth-child(2)"],
+    atRules: [
+      {
+        atRule: "@media(max-width:200px)",
+        modifiers: []
+      }
+    ],
+  })
+})
+
+// arbitrary variant with arbitrary property
+test("[&_first-child]:[z-index:10]", () => {
+  expect(parse("[&_first-child]:[z-index:10]")).toStrictEqual({
+    className: "[&_first-child]:[z-index:10]",
+    responsiveModifier: null,
+    pseudoModifier: null,
+    property: "z-index",
+    value: "10",
+    compositeProperties: {},
+    relatedProperties: [],
+    isImportant: false,
+    arbitraryModifiers: ["& first-child"],
+    atRules: [],
+  })
+})
