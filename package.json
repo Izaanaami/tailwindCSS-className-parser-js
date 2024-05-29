@@ -1,14 +1,18 @@
 {
-  "name": "@ui-devtools/tailwind-utils",
-  "version": "0.0.2",
-  "description": "Utilities to parse and create tailwindcss class names",
+  "name": "tailwindcss-parser",
+  "version": "0.9.1",
+  "description": "parse and create tailwindcss classNames with javascript. simply parse a tailwind className to get information about css property it is affecting, it's value and more.",
   "main": "dist/index.js",
-  "author": "siddharthkp",
+  "author": "izaanaami",
   "license": "MIT",
   "keywords": [
     "tailwindcss",
     "parser",
-    "utils"
+    "utils",
+    "js",
+    "javascript",
+    "tailwind property",
+    "tailwind value"
   ],
   "scripts": {
     "build": "tsc",
@@ -33,10 +37,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ui-devtools/tailwind-utils.git"
+    "url": "git+https://github.com/Izaanaami/tailwind-parser-js.git"
   },
-  "homepage": "https://github.com/ui-devtools/tailwind-utils#readme",
   "bugs": {
-    "url": "https://github.com/ui-devtools/tailwind-utils/issues"
+    "url": "https://github.com/Izaanaami/tailwind-parser-js/issues"
   }
 }

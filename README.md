@@ -1,13 +1,8 @@
-**Thanks to [siddharthkp](https://github.com/siddharthkp) who built the main part of this package**
-
 <p align="center">
-  <img src="https://avatars2.githubusercontent.com/u/71650913?s=200&v=4" height="50px"/>
-  <br><br>
-  <b>Utilities to parse and create tailwindcss classnames</b>
-  <br><br/>
-  <img src="https://github.com/ui-devtools/tailwind-utils/actions/workflows/test.yml/badge.svg"/>
-  <br><br>
-  <i>Extracted from the source code for <a href="https://www.ui-devtools.com">UI Devtools</a> and optimised for open source.</i>
+  <b>do you want to be able to get information of tailwind classes, like the css property they are using?</b> 
+  <b>or the css value of that property ?</b>
+  <b>or even the variants they are using?</b>
+  <i>I got you covered. this package is for you</i>
 </p>
 
 &nbsp;
@@ -15,25 +10,21 @@
 ### Installation
 
 ```
-yarn add @ui-devtools/tailwind-utils
-
-or
-
-npm install @ui-devtools/tailwind-utils
+npm install @tailwindcss-parser
 ```
 
 &nbsp;
 
-### Usage
+<!-- ### Usage
 
-[Open demo in codesandbox](https://codesandbox.io/s/tailwind-utils-m0lvu5?expanddevtools=1)
+[Open demo in codesandbox](https://codesandbox.io/s/tailwind-utils-m0lvu5?expanddevtools=1) -->
 
 <br/>
 
 Setup:
 
 ```ts
-import Utils from '@ui-devtools/tailwind-utils';
+import tailwindParser from 'tailwindcss-parser';
 import config from './tailwind.config.js'; // your tailwind config file, optional
 
 const { parse, classname } = Utils(config);
@@ -56,7 +47,21 @@ const definition = parse('md:hover:bg-red-200/50');
   value: '#fecaca80'
 }
 */
+
+const definition = parse("[direction:rtl]");
+// {property: "direction", value: "rtl"}
+
+const definition = parse("p-[100px]");
+/* 
+{
+  property: "padding", 
+  value: "100px", 
+  relatedProperties: ["padding-top","padding-right","padding-bottom","padding-left"]
+}
+
+*/
 ```
+
 <br/>
 
 definition → classname:
@@ -89,12 +94,17 @@ const { className, error } = classname({
 
 &nbsp;
 
-#### like it?
 
-:star: this repo
+#### Github
 
-&nbsp;
+[GITHUB Repository](https://github.com/Izaanaami/tailwind-parser-js) 
+
+
 
 #### license
 
-MIT © [siddharthkp](https://github.com/siddharthkp) / [Izaanaami](https://github.com/Izaanaami)
+MIT © [Izaanaami](https://github.com/Izaanaami)
+
+
+
+**Thanks to [siddharthkp](https://github.com/siddharthkp) who built the main part of this package**
