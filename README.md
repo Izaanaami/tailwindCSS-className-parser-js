@@ -1,8 +1,8 @@
 <p align="center">
-  <b>do you want to be able to get information of tailwind classes, like the css property they are using?</b> 
-  <b>or the css value of that property ?</b>
-  <b>or even the variants they are using?</b>
-  <i>I got you covered. this package is for you</i>
+  <b>package to parse and create tailwindcss classes with javascript</b>
+  <br/>
+  <br/>
+  you can get information like css property and value, variants and more from tailwind classes in js
 </p>
 
 &nbsp;
@@ -21,7 +21,7 @@ npm install @tailwindcss-parser
 
 <br/>
 
-Setup:
+### Setup:
 
 ```ts
 import tailwindParser from 'tailwindcss-parser';
@@ -32,7 +32,8 @@ const { parse, classname } = Utils(config);
 
 <br/>
 
-classname → definition:
+### usage
+parse className:
 
 ```ts
 const definition = parse('w-48');
@@ -64,7 +65,7 @@ const definition = parse("p-[100px]");
 
 <br/>
 
-definition → classname:
+create className:
 
 ```ts
 const { className } = classname({ property: 'margin', value: '-16rem' });
