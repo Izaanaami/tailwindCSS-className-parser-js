@@ -1,6 +1,6 @@
-import Tailwind from '../src/index';
+import tailwindParser from '../src/index';
 const config = require('./tailwind.config');
-const { classname } = Tailwind(config);
+const { classname } = tailwindParser(config);
 
   test('m-4', () => {
     expect(

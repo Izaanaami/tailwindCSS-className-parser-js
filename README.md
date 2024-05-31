@@ -27,7 +27,7 @@ npm install @tailwindcss-parser
 import tailwindParser from 'tailwindcss-parser';
 import config from './tailwind.config.js'; // your tailwind config file, optional
 
-const { parse, classname } = Utils(config);
+const { parse, classname } = tailwindParser(config);
 ```
 
 <br/>

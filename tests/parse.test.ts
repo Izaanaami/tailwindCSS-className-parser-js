@@ -1,6 +1,6 @@
-import Tailwind from "../src/index";
+import tailwindParser from "../src/index";
 const config = require("./tailwind.config");
-const { parse } = Tailwind(config);
+const { parse } = tailwindParser(config);
 
 test("m-4", () => {
   expect(parse("m-4")).toStrictEqual({

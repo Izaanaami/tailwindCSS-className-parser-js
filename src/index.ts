@@ -10,7 +10,7 @@ import { decodeArbitraryValue } from "./utils/decode-arbitrary-value";
 import { inferDataType } from "./utils/infer-data-type";
 const config = require("../tests/tailwind.config");
 
-const Tailwind = (config?: Config) => {
+const tailwindParser = (config?: Config) => {
   // @ts-ignore resolveConfig doesn't like empty config but stubs it anyways
   const resolvedConfig = resolveConfig(config || {});
   const theme = resolvedConfig.theme || {};
@@ -513,7 +513,7 @@ const Tailwind = (config?: Config) => {
   };
 };
 
-export default Tailwind;
+export default tailwindParser;
 
 const percentToHex = (percent: number) => {
   const intValue = Math.round((percent / 100) * 255); // map percent to nearest integer (0 - 255)
