@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# build files
-dist/
+# tests files
+tests/
+jest.config.js
