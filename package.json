@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-parser",
-  "version": "0.9.2",
+  "version": "0.9.4",
   "description": "parse and create tailwindcss classNames with javascript. simply parse a tailwind className to get information about css property it is affecting, it's value and more.",
   "main": "dist/index.js",
   "author": "izaanaami",
