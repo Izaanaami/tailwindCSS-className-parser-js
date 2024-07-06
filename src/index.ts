@@ -8,7 +8,6 @@ import {
 } from "./properties";
 import { decodeArbitraryValue } from "./utils/decode-arbitrary-value";
 import { inferDataType } from "./utils/infer-data-type";
-const config = require("../tests/tailwind.config");
 
 const tailwindParser = (config?: Config) => {
   // @ts-ignore resolveConfig doesn't like empty config but stubs it anyways
@@ -357,6 +356,7 @@ const tailwindParser = (config?: Config) => {
     }
     if (relatedProperties === undefined) relatedProperties = [];
 
+
     return {
       className,
       responsiveModifier,
@@ -477,7 +477,11 @@ const tailwindParser = (config?: Config) => {
 
         if (scaleKey === "DEFAULT") {
           /* we don't add default */
-        } else if (scaleKey) className += "-" + scaleKey;
+        } else if (scaleKey){
+          className += "-" + scaleKey;
+        } else if (propertyValue.startsWith("[") && propertyValue.endsWith("]")) {
+          className += "-" + decodeArbitraryValue(propertyValue);
+        }
         else if (!error.value) error["value"] = "UNIDENTIFIED_VALUE";
       } else {
         error["property"] = "UNIDENTIFIED_PROPERTY";
