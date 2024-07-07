@@ -432,7 +432,6 @@ const tailwindParser = (config?: Config) => {
             (key) => scale[key][0] === propertyValue
           );
         } else if (matchingProperty.scale === "colors") {
-          console.log(scale,propertyValue)
           const safeValues = ["#fff", "#000", "transparent", "currentColor", "inherit"]
           if(!safeValues.includes(propertyValue)) {
             if (!propertyValue.startsWith("#")) {
