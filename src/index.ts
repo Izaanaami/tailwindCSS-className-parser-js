@@ -432,24 +432,28 @@ const tailwindParser = (config?: Config) => {
             (key) => scale[key][0] === propertyValue
           );
         } else if (matchingProperty.scale === "colors") {
-          if (!propertyValue.startsWith("#")) {
-            error["value"] =
-              "Only hex values are supported, example: #fecaca80";
-          } else if (![7, 9].includes(propertyValue.length)) {
-            error["value"] =
-              "Shorthand hex values like #0008 are not supported, please pass the full value like #00000080";
+          console.log(scale,propertyValue)
+          const safeValues = ["#fff", "#000", "transparent", "currentColor", "inherit"]
+          if(!safeValues.includes(propertyValue)) {
+            if (!propertyValue.startsWith("#")) {
+              error["value"] =
+                  "Only hex values are supported, example: #fecaca80";
+            } else if (![7, 9].includes(propertyValue.length)) {
+              error["value"] =
+                  "Shorthand hex values like #0008 are not supported, please pass the full value like #00000080";
+            }
           }
 
           let opacity: number | null = null;
 
           // example: #fecaca80
-          if (propertyValue.length === 9) {
+          if (propertyValue.length === 9 && propertyValue.startsWith("#")) {
             opacity = hexToPercent(propertyValue.slice(-2));
             propertyValue = propertyValue.slice(0, -2);
           }
 
           // convert to lowercase for comparison
-          propertyValue = propertyValue.toLowerCase();
+          propertyValue = safeValues.includes(propertyValue) ? propertyValue : propertyValue.toLowerCase();
 
           scaleKey = Object.keys(scale).find((key) => {
             return scale[key] === propertyValue;
